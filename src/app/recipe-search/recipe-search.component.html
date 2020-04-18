@@ -1,0 +1,51 @@
+<section class="search">
+  <div class="search__box">
+    <div class="search__box--wrapper">
+      <h1 class="search__box--title">Search</h1>
+      <p class="search__box--paragraph">We Find Your Dream Recipes</p>
+    </div>
+  </div>
+  <div class="search__form--box">
+    <form class="search__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <div class="search__group search__group--title">
+        <input
+        placeholder="Enter Any Title..."
+        class="search__input search__input--title"
+        type="text"
+        formControlName="name"
+        required
+        minlength="3"
+        #searchName>
+        <small
+        class="search__input--title--small"
+        [ngClass]="{'name--red': !searchForm.valid}"
+        >
+        Must be least 3 Characters long!</small>
+        <label class="search__label search__label--title" for="title">Name</label>
+      </div>
+      <div class="search__calories--box">
+        <div class="search__group search__group--calories">
+          <input
+          placeholder="Min Calories"
+          type="number"
+          class="search__input search__input--calories"
+          formControlName="minCalories"
+          required>
+          <label class="search__label" for="minCalories">Min</label>
+        </div>
+        <div class="search__group search__group--calories">
+          <input
+          placeholder="Max Calories"
+          type="number"
+          class="search__input search__input--calories"
+          formControlName="maxCalories"
+          required
+          >
+          <label class="search__label" for="maxCalories">Max</label>
+        </div>
+      </div>
+      <button type="submit" class="search__button">Search</button>
+    </form>
+    Form Value {{searchForm.value | json}} | Form Valid: {{searchForm.valid}}
+  </div>
+</section>

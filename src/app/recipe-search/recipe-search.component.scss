@@ -1,0 +1,206 @@
+@import "../../styles.scss";
+
+.search {
+    height: 92vh;
+    position: relative;
+    background: url(../../assets/food.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &__box {
+        position: relative;
+        top: 25%;
+        height: 18%;
+        width: 80%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        @include respond(phone) {
+          width: 95%;
+        }
+        &--wrapper {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        &--title {
+            text-transform: uppercase;
+            color: $color-black;
+            font-size: 10rem;
+            text-shadow: 0 0.1rem .5rem black;
+            font-weight: bold;
+            font-family: "Montserrat";
+            text-overflow: hidden;
+            @include respond(phone) {
+              font-size: 6rem;
+            }
+
+        }
+        &--paragraph {
+            font-size: 2.3rem;
+            font-family: "Merriweather";
+            color: $color-black;
+            font-weight: bold;
+        }
+    }
+
+    &__form {
+        position: relative;
+        height: 90%;
+        top: 45%;
+        width: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        @include respond(phone) {
+          width: 95%;
+        }
+        &--box {
+            position: relative;
+            width: 80%;
+            height: 45%;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            @include respond(phone) {
+              width: 95%;
+            }
+        }
+    }
+     &__group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        &--calories {
+          height: 80%;
+          width: 40%;
+        }
+
+        &--title {
+          height: 35%;
+          width: 70%;
+          @include respond(phone) {
+            width: 90%;
+          }
+        }
+     }
+
+     &__calories--box {
+       height: 30%;
+       width: 70%;
+       display: flex;
+       align-items: center;
+       justify-content: space-around;
+       @include respond(phone) {
+         width: 90%;
+       }
+     }
+
+     &__input {
+       background-color: $color-black;
+       border: .3rem solid white;
+       font-family: "Merriweather";
+       font-weight: bold;
+       box-shadow: 0rem .1rem .5rem black;
+       padding-left: 2rem;
+       color: white;
+       &--title {
+         height: 40%;
+         width: 70%;
+         &--small {
+           font-size: 1rem;
+           font-family: "Montserrat";
+           color: green;
+         }
+         @include respond(tab-port) {
+           width: 85%;
+
+         }
+         &::placeholder {
+           letter-spacing: .2rem;
+         }
+       }
+       &--calories {
+         width: 60%;
+         height: 38%;
+         text-align: center;
+         padding: 0;
+         @include respond(tab-port) {
+           width: 80%;
+           height: 40%;
+         }
+         @include respond(phone) {
+           width: 100%;
+         }
+         &::placeholder {
+         font-size: 1.1rem;
+         }
+       }
+       &:active,
+       &:focus {
+         outline: none;
+       }
+       &::placeholder {
+         color: white;
+         font-weight: bold;
+         font-family: "Merriweather";
+         text-align: center;
+        }
+     }
+
+     &__label {
+      font-family: "Montserrat";
+      font-size: 2rem;
+      color: $color-black;
+      font-weight: bold;
+      text-transform: uppercase;
+     }
+
+     &__button {
+       padding: 1rem 5rem;
+       background-color: transparent;
+       outline: none;
+       border: .4rem solid black;
+       color: black;
+       font-weight: bold;
+       font-family: "Merriweather";
+       cursor: pointer;
+       transition: all .3s;
+       font-weight: bold;
+       letter-spacing: .2rem;
+       &:hover {
+         background-color: black;
+         border: .4rem solid white;
+         color: white;
+         transform: translateY(-.5rem) scale(1.1);
+       }
+       &:disabled {
+         opacity: 0.3;
+         cursor: pointer;
+         &:hover {
+           background-color: transparent;
+           border: .4rem solid black;
+           color: black;
+         }
+       }
+     }
+}
+
+.ng-invalid.ng-touched input {
+  border: .3rem solid red;
+}
+
+.name--red {
+  color: red;
+}
