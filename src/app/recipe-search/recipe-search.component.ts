@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-search',
@@ -7,6 +8,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./recipe-search.component.scss']
 })
 export class RecipeSearchComponent implements OnInit {
+
+  constructor(private recipeService: RecipeService) { }
+
+
   searchForm = new FormGroup({
     name: new FormControl("", [
       Validators.required,
@@ -15,17 +20,19 @@ export class RecipeSearchComponent implements OnInit {
     minCalories: new FormControl("0", [
       Validators.required
     ]),
-    maxCalories: new FormControl("1000", [
+    maxCalories: new FormControl("1500", [
       Validators.required,
     ])
   })
 
-  constructor() { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    console.log(this.searchForm.controls)
+    let minCalories = +this.searchForm.controls.minCalories.value;
+    let maxCalories = +this.searchForm.controls.maxCalories.value;
+    let name = this.searchForm.controls.name.value;
+    this.recipeService.searchRecipes(minCalories, maxCalories, name);
   }
 }

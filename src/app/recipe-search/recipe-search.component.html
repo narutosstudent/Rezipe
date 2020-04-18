@@ -44,8 +44,7 @@
           <label class="search__label" for="maxCalories">Max</label>
         </div>
       </div>
-      <button type="submit" class="search__button">Search</button>
+      <button type="submit" class="search__button" [disabled]="!searchForm.valid">Search</button>
     </form>
-    Form Value {{searchForm.value | json}} | Form Valid: {{searchForm.valid}}
   </div>
 </section>

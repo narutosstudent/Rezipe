@@ -108,13 +108,13 @@
      }
 
      &__input {
-       background-color: $color-black;
-       border: .3rem solid white;
+       background-color: white;
+       border: .3rem solid rgb(0, 0, 0);
        font-family: "Merriweather";
        font-weight: bold;
        box-shadow: 0rem .1rem .5rem black;
        padding-left: 2rem;
-       color: white;
+       color: black;
        &--title {
          height: 40%;
          width: 70%;
@@ -152,7 +152,7 @@
          outline: none;
        }
        &::placeholder {
-         color: white;
+         color: black;
          font-weight: bold;
          font-family: "Merriweather";
          text-align: center;
