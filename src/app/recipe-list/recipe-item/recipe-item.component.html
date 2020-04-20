@@ -1,6 +1,7 @@
 
 <div class="recipe" (click)="onClick()">
-  <img [src]="recipe.image" alt="" class="recipe__image">
+  <p class="recipe__ingredients"> {{recipe.ingredients.length}} <i class="fas fa-thumbtack"></i> </p>
+  <img [src]="recipe.image" alt="recipe" class="recipe__image">
   <h1 class="recipe__label"> {{recipe.label}} </h1>
   <h3 class="recipe__calories"> <span class="recipe__calories--number">{{recipe.calories | number: "1.0-0"}}</span> Calories</h3>
   <div *ngIf="recipe.dietLabels" class="recipe__labels">

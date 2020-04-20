@@ -1,0 +1,105 @@
+@import "../../styles.scss";
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  &__label {
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 3rem;
+    color: black;
+    font-weight: 400;
+    text-decoration: underline;
+  }
+
+  &__image {
+    height: 80%;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0rem .1rem .4rem black;
+    @include respond(phone) {
+      width: 60%;
+      height: auto;
+    }
+  }
+
+  &__wrapper {
+    height: 40vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 95vw;
+    background-color: rgb(241, 241, 241);
+    box-shadow: 0rem .1rem .5rem black;
+    margin-top: 2rem;
+    @include respond(phone) {
+      width: 100vw;
+      height: 70vh;
+      flex-direction: column;
+    }
+  }
+
+  &__box {
+    height: 80%;
+    width: 40%;
+    border: .1rem solid black;
+    background-color: rgb(228, 228, 228);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    @include respond(phone) {
+      height: 45%;
+      width: 90%;
+    }
+  }
+
+  &__calories {
+    font-family: "Montserrat";
+    font-weight: 300;
+    color: black;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  &__labels {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__diet {
+    font-family: "Merriweather";
+    text-align: center;
+    letter-spacing: .2rem;
+    font-weight: bold;
+    color: rgb(17, 82, 17);
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  &__health {
+    font-family: "Montserrat";
+    text-align: center;
+    margin-top: 1rem;
+    letter-spacing: .2rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgb(105, 81, 20);
+  }
+
+  &__caution {
+    font-family: "Merriweather";
+    text-align: center;
+    margin-top: 1rem;
+    letter-spacing: .2rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgb(110, 15, 15);
+
+  }
+
+
+}

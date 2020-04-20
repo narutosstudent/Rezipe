@@ -1,0 +1,19 @@
+<section class="detail">
+  <h1 class="detail__label"> {{recipe.label}} </h1>
+  <div class="detail__wrapper">
+    <img [src]="recipe.image" alt="recipe" class="detail__image">
+      <div class="detail__box">
+        <h3 class="detail__calories"> Calories: {{recipe.calories | number: "1.0-0"}} </h3>
+        <div *ngIf="recipe.dietLabels" class="details__labels">
+          <h3 class="detail__diet" *ngFor="let diet of recipe.dietLabels"> {{diet}} <i class="fas fa-check"></i> </h3>
+        </div>
+        <div *ngIf="recipe.healthLabels" class="details__labels">
+          <h3 *ngFor="let health of recipe.healthLabels" class="detail__health"> {{health}} </h3>
+        </div>
+        <div *ngIf="recipe.cautions" class="details__labels">
+          <h3 *ngFor="let caution of recipe.cautions" class="detail__caution"> {{caution}} <i
+              class="fas fa-skull-crossbones"></i> </h3>
+        </div>
+      </div>
+  </div>
+</section>

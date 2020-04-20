@@ -1,6 +1,6 @@
 import { environment } from "./../environments/environment";
 import { Injectable } from '@angular/core';
-import { of, Observable, BehaviorSubject } from "rxjs";
+import { of, Observable, BehaviorSubject, Subject } from "rxjs";
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Recipe } from './models/recipe.model';
 import {tap, map, catchError} from "rxjs/operators";
@@ -11,12 +11,21 @@ import { RecipeResponseData } from './models/response-data.model';
 })
 export class RecipeService {
   recipes: Recipe[] = [];
+  recipesSubject = new Subject<Recipe[]>();
 
   recipe: Recipe;
+  recipeSubject = new Subject<Recipe>();
 
   loading = new BehaviorSubject<boolean>(false);
 
+
+
+
+
   constructor(private http: HttpClient) { }
+
+
+
 
   searchRecipes(minCal: number, maxCal: number, name: string) {
     this.loading.next(true);
@@ -28,27 +37,29 @@ export class RecipeService {
     this.http.get<RecipeResponseData>("https://api.edamam.com/search", {
       params: searchParams
     })
-    .pipe(tap(responseData => {
+    .pipe(tap((responseData: RecipeResponseData) => {
       console.log("Recipes Fetched", responseData);
     }),
     catchError(this.handleError<RecipeResponseData>("Search Recipes"))
     )
-    .subscribe(responseData => {
+    .subscribe((responseData: RecipeResponseData) => {
       responseData.hits.forEach(hit => {
         this.recipes.push(hit.recipe);
       });
       localStorage.removeItem("recipes");
       localStorage.setItem("recipes", JSON.stringify(this.recipes));
+      this.recipesSubject.next(this.recipes);
       this.loading.next(false);
     });
   }
 
   getRecipes() {
-    let recipes = JSON.parse(localStorage.getItem("recipes"));
+    const recipes = JSON.parse(localStorage.getItem("recipes"));
     return of(recipes);
   }
 
   searchRecipe(uri: string) {
+    this.loading.next(true)
     let searchParams = new HttpParams();
     searchParams = searchParams.append("r", uri);
     searchParams = searchParams.append("app_id", environment.app_id);
@@ -61,9 +72,14 @@ export class RecipeService {
       this.recipe = responseData[0];
       localStorage.removeItem("recipe");
       localStorage.setItem("recipe", JSON.stringify(this.recipe));
+      this.recipeSubject.next(this.recipe);
       this.loading.next(false);
     });
+  }
 
+  getRecipe() {
+    const recipe = JSON.parse(localStorage.getItem("recipe"));
+    return of(recipe);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
