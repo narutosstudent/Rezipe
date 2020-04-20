@@ -59,9 +59,10 @@ export interface Recipe {
   yield: number,
   calories: number,
   totalWeight: number,
+  cautions?: any,
   ingredients: Ingredient[],
   totalNutrients: NutrientInfo[],
   totalDaily: NutrientInfo[],
-  dietLabels: DietLabel[],
-  healthLabels: HealthLabel[]
+  dietLabels?: DietLabel[],
+  healthLabels?: HealthLabel[]
 }

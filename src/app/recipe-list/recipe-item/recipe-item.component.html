@@ -1,0 +1,22 @@
+
+<div class="recipe" (click)="onClick()">
+  <img [src]="recipe.image" alt="" class="recipe__image">
+  <h1 class="recipe__label"> {{recipe.label}} </h1>
+  <h3 class="recipe__calories"> <span class="recipe__calories--number">{{recipe.calories | number: "1.0-0"}}</span> Calories</h3>
+  <div *ngIf="recipe.dietLabels" class="recipe__labels">
+    <h3 *ngFor="let dietLabel of recipe.dietLabels" class="recipe__labels--diet">
+      {{dietLabel}}
+      <i class="fas fa-check"></i></h3>
+  </div>
+  <div *ngIf="recipe.healthLabels" class="recipe__labels">
+    <h3 class="recipe__labels--health"
+    *ngFor="let healthLabel of recipe.healthLabels">
+    {{healthLabel}}
+   </h3>
+  </div>
+  <div *ngIf="recipe.cautions" class="recipe__labels">
+    <h3 *ngFor="let caution of recipe.cautions" class="recipe__labels--caution">
+      {{caution}} <i class="fas fa-skull-crossbones"></i>
+    </h3>
+  </div>
+</div>

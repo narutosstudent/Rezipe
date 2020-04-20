@@ -1,0 +1,6 @@
+
+<app-spinner *ngIf="loading"></app-spinner>
+
+<section class="recipes" *ngIf="!loading">
+  <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
+</section>

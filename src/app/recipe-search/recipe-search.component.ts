@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-search',
@@ -9,7 +10,7 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeSearchComponent implements OnInit {
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private router: Router) { }
 
 
   searchForm = new FormGroup({
@@ -34,5 +35,6 @@ export class RecipeSearchComponent implements OnInit {
     let maxCalories = +this.searchForm.controls.maxCalories.value;
     let name = this.searchForm.controls.name.value;
     this.recipeService.searchRecipes(minCalories, maxCalories, name);
+    this.router.navigate(["recipes"]);
   }
 }

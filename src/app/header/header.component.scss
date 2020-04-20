@@ -4,7 +4,7 @@
 .nav {
   height: 9rem;
   position: sticky;
-  background-color: rgb(235, 229, 229);
+  background-color: rgb(224, 220, 220);
   &__wrapper {
     height: 90%;
     width: 90%;
@@ -28,14 +28,14 @@
 
   &__link {
     text-decoration: none;
-    color: $color-black;
+    color: rgb(80, 70, 70);
     font-size: 1.6rem;
-    font-family: "Merriweather";
+    font-family: "Montserrat";
     transition: all .3s;
     &--active {
-            transform: scale(1.2);
-            color: white;
-            background-color: black;
+            transform: scale(1.2) translateY(-.2rem);
+            color: $color-black;
+            font-weight: bold;
     }
     &:hover {
       transform: scale(1.2);

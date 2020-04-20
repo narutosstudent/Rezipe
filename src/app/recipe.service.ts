@@ -1,6 +1,6 @@
 import { environment } from "./../environments/environment";
 import { Injectable } from '@angular/core';
-import { of, Observable } from "rxjs";
+import { of, Observable, BehaviorSubject } from "rxjs";
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Recipe } from './models/recipe.model';
 import {tap, map, catchError} from "rxjs/operators";
@@ -11,10 +11,15 @@ import { RecipeResponseData } from './models/response-data.model';
 })
 export class RecipeService {
   recipes: Recipe[] = [];
-  recipesData: RecipeResponseData = null;
+
+  recipe: Recipe;
+
+  loading = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) { }
 
   searchRecipes(minCal: number, maxCal: number, name: string) {
+    this.loading.next(true);
     let searchParams = new HttpParams();
     searchParams = searchParams.append("q", name);
     searchParams = searchParams.append("calories", `${minCal}-${maxCal}`);
@@ -29,17 +34,36 @@ export class RecipeService {
     catchError(this.handleError<RecipeResponseData>("Search Recipes"))
     )
     .subscribe(responseData => {
-      console.log(responseData);
-      this.recipesData = responseData;
       responseData.hits.forEach(hit => {
         this.recipes.push(hit.recipe);
       });
-      console.log(this.recipes)
+      localStorage.removeItem("recipes");
+      localStorage.setItem("recipes", JSON.stringify(this.recipes));
+      this.loading.next(false);
     });
   }
 
   getRecipes() {
-    return of(this.recipes);
+    let recipes = JSON.parse(localStorage.getItem("recipes"));
+    return of(recipes);
+  }
+
+  searchRecipe(uri: string) {
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append("r", uri);
+    searchParams = searchParams.append("app_id", environment.app_id);
+    searchParams = searchParams.append("app_key", environment.app_key);
+    this.http.get<Recipe>("https://api.edamam.com/search", {
+      params: searchParams
+    })
+    .pipe(catchError(this.handleError<Recipe>("Search Recipe")))
+    .subscribe(responseData => {
+      this.recipe = responseData[0];
+      localStorage.removeItem("recipe");
+      localStorage.setItem("recipe", JSON.stringify(this.recipe));
+      this.loading.next(false);
+    });
+
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
