@@ -13,7 +13,13 @@
         <div *ngIf="recipe.cautions" class="details__labels">
           <h3 *ngFor="let caution of recipe.cautions" class="detail__caution"> {{caution}} <i
               class="fas fa-skull-crossbones"></i> </h3>
-        </div>
+          </div>
       </div>
+  </div>
+
+  <h1 class="detail__title"> Ingredients </h1>
+
+  <div class="detail__ingredients">
+    <h3 class="detail__ingredient" *ngFor="let ingredient of recipe.ingredients"> {{ingredient.text}} </h3>
   </div>
 </section>

@@ -12,6 +12,7 @@
     color: black;
     font-weight: 400;
     text-decoration: underline;
+    margin-top: 1rem;
   }
 
   &__image {
@@ -99,6 +100,59 @@
     font-weight: 400;
     color: rgb(110, 15, 15);
 
+  }
+
+  &__ingredients {
+    width: 95vw;
+    background-color: rgb(211, 211, 211);
+    box-shadow: 0rem .1rem 1rem black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 4rem 0rem;
+  }
+
+  &__title {
+    position: relative;
+    margin-top: 2.5rem;
+    font-size: 7rem;
+    font-family: "Montserrat";
+    color: black;
+    text-shadow: 0rem .1rem 1rem black;
+    letter-spacing: 1rem;
+    font-weight: 300;
+    text-decoration: underline;
+    text-transform: uppercase;
+    box-shadow: 0rem .1rem 1rem black;
+    padding: 1rem;
+    border-radius: .3rem;
+    @include respond(phone) {
+      font-size: 5rem;
+      letter-spacing: 0rem;
+      border-radius: 0rem;
+      padding: 0rem;
+      box-shadow: none;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+  }
+
+  &__ingredient {
+    font-size: 2rem;
+    font-family: "Montserrat";
+    font-weight: 600;
+    width: 48%;
+    border: .1rem solid rgb(0, 0, 0);
+    text-align: center;
+    background-color: grey;
+    box-shadow: 0rem .1rem 1rem black;
+    color: rgb(255, 255, 255);
+    margin: 1.5rem 0rem;
+    text-shadow: 0rem .1rem .3rem black;
+    @include respond(phone) {
+      width: 90%;
+    }
   }
 
 
