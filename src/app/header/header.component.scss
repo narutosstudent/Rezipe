@@ -28,19 +28,17 @@
 
   &__link {
     text-decoration: none;
-    color: rgb(80, 70, 70);
+    color: black;
     font-size: 1.6rem;
     font-family: "Montserrat";
     transition: all .3s;
     &--active {
-            transform: scale(1.2) translateY(-.2rem);
-            color: $color-black;
+            color: white;
+            background-color: black;
             font-weight: bold;
     }
     &:hover {
-      transform: scale(1.2);
-      color: white;
-      background-color: black;
+      transform: scale(1.1);
     }
   }
 
@@ -54,6 +52,9 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    &--links {
+      width: 19rem;
+    }
   }
 }
 

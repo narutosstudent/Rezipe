@@ -12,14 +12,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe = null;
 
-  constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onClick() {
     this.recipeService.searchRecipe(this.recipe.uri);
-    this.router.navigate(["single"], {relativeTo: this.route});
+    this.router.navigate(["/recipes/single"]);
   }
 
 }

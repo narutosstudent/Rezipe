@@ -5,6 +5,7 @@
       <p class="search__box--paragraph">We Find Your Dream Recipes</p>
     </div>
   </div>
+
   <div class="search__form--box">
     <form class="search__form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
       <div class="search__group search__group--title">
@@ -15,12 +16,15 @@
         formControlName="name"
         required
         minlength="3"
-        #searchName>
-        <small
-        class="search__input--title--small"
-        [ngClass]="{'name--red': !searchForm.valid}"
         >
-        Must be least 3 Characters long!</small>
+
+      <small
+        class="search__input--title--small"
+        [ngClass]="{'name--red': !searchForm['controls'].name.valid}"
+        >
+        Must be least 3 Characters long!
+      </small>
+
         <label class="search__label search__label--title" for="title">Name</label>
       </div>
       <div class="search__calories--box">

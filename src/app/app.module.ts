@@ -3,25 +3,27 @@ import { RouterModule } from "@angular/router";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { SpinnerModule } from "./shared/spinner/spinner.module";
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent,
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    SpinnerModule,
+    SharedModule,
     AppRoutingModule
   ],
   providers: [],
