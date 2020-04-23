@@ -1,6 +1,6 @@
 # Rezipe
 
-A website where people can search and add recipes to their websites
+A website where people can search recipes based on name & calories as well as adding them to their dashboard.
 
 ## Getting Started
 
