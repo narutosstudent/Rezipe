@@ -13,8 +13,10 @@ export class DashboardService {
 
   addRecipe(recipe: Recipe) {
     let recipes: Recipe[] = JSON.parse(localStorage.getItem("dashboardRecipes"));
+    if (!recipes) {
+      recipes = [];
+    }
     recipes.unshift(recipe);
-
     this.recipesChanged.next(recipes.slice());
     localStorage.setItem("dashboardRecipes", JSON.stringify(recipes));
   }

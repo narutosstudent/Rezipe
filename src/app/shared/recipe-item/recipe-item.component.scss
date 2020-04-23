@@ -129,6 +129,10 @@
         border: .3rem solid white;
         transform: translate(-50%, -.5rem)
       }
+      &:active,
+      &:focus {
+        outline: none;
+      }
     }
 
 }
