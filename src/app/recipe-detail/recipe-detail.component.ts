@@ -15,7 +15,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   getRecipeSubscription: Subscription;
   recipeSubscription: Subscription;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService) {
+    console.log(this.recipe);
+  }
 
   ngOnInit(): void {
 

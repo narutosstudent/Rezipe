@@ -1,0 +1,25 @@
+@import "../../../styles.scss";
+
+.alert {
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  width: 80vw;
+  height: 3vh;
+  background-color: rgb(54, 255, 54);
+  border: .1rem solid black;
+  border-radius: .3rem;
+  box-shadow: 0rem .1rem .3rem black;
+  position: relative;
+  letter-spacing: .2rem;
+  color: white;
+  margin: 1rem 0rem;
+  text-shadow: 0rem .1rem .3rem black;
+  left: 50%;
+  transform: translateX(-50%);
+  @include respond(phone) {
+    letter-spacing: 0rem;
+    font-size: 1.8rem;
+  }
+}

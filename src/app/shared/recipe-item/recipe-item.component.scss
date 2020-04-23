@@ -108,4 +108,27 @@
         }
     }
 
+    &__button {
+      background-color: white;
+      border: .3rem solid black;
+      font-family: "Montserrat";
+      font-weight: 400;
+      position: relative;
+      padding: 1rem 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      transition: all .3s;
+      text-align: center;
+      box-shadow: 0rem .1rem .3rem black;
+      margin-bottom: 2.5rem;
+      &:hover {
+        background-color: black;
+        font-weight: bold;
+        color: white;
+        border: .3rem solid white;
+        transform: translate(-50%, -.5rem)
+      }
+    }
+
 }

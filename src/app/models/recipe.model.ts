@@ -17,6 +17,7 @@ interface NutrientInfo {
 }
 
 interface Ingredient {
+  text: string,
   foodId: string,
   quantity: number,
   measure: Measure,

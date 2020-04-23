@@ -54,10 +54,11 @@ export class RecipeService {
       localStorage.removeItem("recipes");
       localStorage.setItem("recipes", JSON.stringify(this.recipes));
 
-      this.recipesSubject.next(this.recipes);
+      this.recipesSubject.next(this.recipes.slice());
       this.loading.next(false);
     });
   }
+  
 
   // Get the recipes
   getRecipes() {
@@ -79,7 +80,7 @@ export class RecipeService {
     .pipe(catchError(this.handleError<Recipe>("Search Recipe")))
     .subscribe(responseData => {
       this.recipe = responseData[0];
-      this.recipeSubject.next(this.recipe);
+      this.recipeSubject.next(Object.assign({}, this.recipe));
       localStorage.removeItem("recipe");
       localStorage.setItem("recipe", JSON.stringify(this.recipe));
     });

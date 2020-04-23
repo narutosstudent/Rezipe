@@ -6,8 +6,8 @@
     </div>
 
     <div class="nav__box nav__box--links">
-    <a routerLink="/" routerLinkActive="nav__link--active" class="nav__link">Search</a>
-    <a routerLink="/list" routerLinkActive="nav__link--active" class="nav__link">Dashboard</a>
+    <a routerLink="/" routerLinkActive="nav__link--active" [routerLinkActiveOptions]="{exact: true}" class="nav__link">Search</a>
+    <a routerLink="/dashboard" routerLinkActive="nav__link--active" class="nav__link">Dashboard</a>
     </div>
   </div>
 </nav>

@@ -5,6 +5,7 @@ import { RecipeResponseData } from '../models/response-data.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -21,8 +22,12 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   loadingSubscription: Subscription;
   recipesSubjectSubscription: Subscription;
 
+  buttonActionName: string = "Add";
+  alertMessage: string = "Successfully added recipe to your list";
+  alertActive: boolean = false;
 
-  constructor(private recipeService: RecipeService, private router: Router) {
+
+  constructor(private recipeService: RecipeService, private router: Router, private dashboardService: DashboardService) {
     this.recipes = [];
   }
 
@@ -38,6 +43,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipesSubjectSubscription = this.recipeService.recipesSubject.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
     });
+  }
+
+  onAddRecipe(recipe: Recipe) {
+    this.dashboardService.addRecipe(recipe);
+    this.alertActive = true;
+    setTimeout(() => {
+      this.alertActive = false;
+    }, 1500);
   }
 
   ngOnDestroy() {

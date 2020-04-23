@@ -1,0 +1,15 @@
+.recipes {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: rgb(235, 233, 233);
+  &__none {
+    margin: 3rem 0rem;
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0rem .1rem .3rem black;
+  }
+}

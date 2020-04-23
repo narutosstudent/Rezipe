@@ -1,5 +1,9 @@
 
+<app-alert [message]="alertMessage" *ngIf="alertActive"></app-alert>
 <app-spinner *ngIf="loading"></app-spinner>
 <section class="recipes" *ngIf="!loading">
-  <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
+  <app-recipe-item
+  *ngFor="let recipe of recipes" [recipe]="recipe"
+  [actionName]="buttonActionName"
+  (buttonAction)="onAddRecipe($event)"></app-recipe-item>
 </section>
