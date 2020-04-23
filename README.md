@@ -1,27 +1,46 @@
 # Rezipe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+A website where people can search and add recipes to their websites
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
-## Code scaffolding
+### Installing
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A step by step series of examples that tell you how to get a development env running
 
-## Build
+```
+npm install
+```
+### Do not forget the key and id in src/environments
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Deployment
 
-## Running unit tests
+Add keys and You will be abled to deploy this Zeit with now
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Built With
 
-## Running end-to-end tests
+* [Angular] - The Front End Framework used
+* [Edemam] - The Api used
+* [(S)CSS] - UI Framework used for styling
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Authors
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* **Tiger Abrodi** - *Initial work* - 
+
+## License
+
+This project is licensed under the MIT License 
+
+# What I Learned
+- Angular
+- Working with APIs
+- Working with localStorage
+- Splitting app into modules
+- How to create components, modules, services & more and work with these
+- Using environment variables
+- Creating reusable components
+- Deploying on Zeit with now
+- Implementing form validation
