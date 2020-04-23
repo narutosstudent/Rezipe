@@ -41,11 +41,7 @@ export class RecipeService {
     this.http.get<RecipeResponseData>("https://api.edamam.com/search", {
       params: searchParams
     })
-    .pipe(tap((responseData: RecipeResponseData) => {
-      console.log("Recipes Fetched", responseData);
-    }),
-    catchError(this.handleError<RecipeResponseData>("Search Recipes"))
-    )
+    .pipe(catchError(this.handleError<RecipeResponseData>("Search Recipes")))
     .subscribe((responseData: RecipeResponseData) => {
       responseData.hits.forEach(hit => {
         this.recipes.push(hit.recipe);
@@ -58,7 +54,7 @@ export class RecipeService {
       this.loading.next(false);
     });
   }
-  
+
 
   // Get the recipes
   getRecipes() {

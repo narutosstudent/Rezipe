@@ -20,7 +20,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   alertActive: boolean = false;
 
-  constructor(private dashboardService: DashboardService, private recipeService: RecipeService) {}
+  constructor(private dashboardService: DashboardService, private recipeService: RecipeService) {
+    this.recipes = [];
+  }
 
     ngOnInit(): void {
       this.recipesChangedSubscription = this.dashboardService.recipesChanged.subscribe((recipes: Recipe[]) => {
