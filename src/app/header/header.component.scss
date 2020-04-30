@@ -4,6 +4,9 @@
 .nav {
   height: 9rem;
   position: sticky;
+  top: 0;
+  z-index: 300;
+  box-shadow: 0rem .3rem .5rem black;
   background-color: rgb(240, 240, 240);
   &__wrapper {
     height: 90%;

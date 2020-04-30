@@ -1,0 +1,140 @@
+@import "../../styles.scss";
+
+.home {
+    background-image: url("../../assets/wall.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 91vh;
+    &__wrapper {
+        height: 95%;
+        width: 98%;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        @include respond(phone) {
+          flex-direction: column;
+        }
+    }
+}
+
+.text {
+    height: 70%;
+    width: 40%;
+    box-shadow: 0 0 0.5rem black;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: rgba(211, 211, 211, 0.397);
+    @include respond(phone) {
+      height: 40%;
+      width: 99%;
+    }
+    &__title {
+        text-align: center;
+        font-family: "Montserrat";
+        font-size: 5rem;
+        color: white;
+        text-shadow: 0 0.1rem 0.3rem black;
+        @include respond(phone) {
+          font-size: 4rem;
+        }
+    }
+    &__span {
+        background-color: rgb(0, 0, 0);
+        color: white;
+        text-shadow: none;
+    }
+    &__button {
+        &,
+        &:focus,
+        &:link,
+        &:visited {
+            background-color: rgba(228, 228, 228, 0.527);
+            box-shadow: 0 0.3rem 0.5rem black;
+            padding: 1.2rem 6rem;
+            font-family: "Montserrat";
+            font-size: 4rem;
+            font-weight: 400;
+            text-decoration: none;
+            color: black;
+            transition: all 0.3s;
+            &:hover {
+                transform: translateY(-.7rem);
+                box-shadow: 0 0.8rem 0.5rem;
+                background-color: rgba(221, 221, 221, 0.801);
+            }
+        }
+    }
+}
+
+.images {
+    height: 95%;
+    width: 55%;
+    position: relative;
+    @include respond(phone) {
+      width: 98%;
+      height: 55%;
+    }
+    &__wrapper {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        overflow: hidden;
+        @include respond(tab-land) {
+            width: 70%;
+        }
+        &:hover {
+            box-shadow: 0 0 0.7rem black;
+            z-index: 1000;
+            border: 0.3rem solid black;
+        }
+        &--1 {
+            top: 30%;
+            left: 33%;
+            @include respond(tab-land) {
+                top: 31%;
+                left: 37%;
+            }
+            @include respond(tab-port) {
+              top: 35%;
+            }
+        }
+        &--2 {
+            top: 37%;
+            left: 68%;
+            @include respond(tab-land) {
+                top: 42%;
+                left: 63%;
+            }
+        }
+        &--3 {
+            top: 70%;
+            left: 45%;
+            width: 75%;
+            @include respond(tab-land) {
+                width: 85%;
+                top: 65%;
+            }
+            @include respond(tab-port) {
+                top: 60%;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+        transition: all 1.5s;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

@@ -46,11 +46,11 @@ export class RecipeService {
         this.recipes.push(hit.recipe);
       });
       this.recipesSubject.next(this.recipes.slice());
-      this.router.navigate(["recipes"]);
+      this.router.navigate(["/recipes"]);
 
       setTimeout(() => {
         this.uiService.loadingStateChanged.next(false);
-      }, 1500);
+      }, 1000);
     });
   }
 
@@ -80,7 +80,7 @@ export class RecipeService {
 
       setTimeout(() => {
         this.uiService.loadingStateChanged.next(false);
-      }, 1500);
+      }, 1000);
     });
   }
 
