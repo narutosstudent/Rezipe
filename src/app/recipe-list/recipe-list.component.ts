@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DashboardService } from '../dashboard/dashboard.service';
+import { UiService } from '../shared/ui.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -16,47 +17,48 @@ import { DashboardService } from '../dashboard/dashboard.service';
 
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
-  loading: boolean;
+  loading = false;
 
-  getRecipesSubscription: Subscription;
-  loadingSubscription: Subscription;
   recipesSubjectSubscription: Subscription;
+  loadingSubscription: Subscription;
 
   buttonActionName: string = "Add";
-  alertMessage: string = "Successfully added recipe to your list";
-  alertActive: boolean = false;
 
 
-  constructor(private recipeService: RecipeService, private router: Router, private dashboardService: DashboardService) {
+  constructor(
+              private recipeService: RecipeService,
+              private dashboardService: DashboardService,
+              private uiService: UiService
+              ) {
+
     this.recipes = [];
   }
 
   ngOnInit(): void {
-    this.getRecipesSubscription = this.recipeService.getRecipes().subscribe((recipes: Recipe[]) => {
-      this.recipes = recipes;
-    });
-
-    this.loadingSubscription = this.recipeService.loading.subscribe((loading: boolean) => {
-      this.loading = loading;
-    });
+    this.recipes = this.recipeService.getRecipes();
 
     this.recipesSubjectSubscription = this.recipeService.recipesSubject.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
     });
+
+    this.loadingSubscription = this.uiService.loadingStateChanged.subscribe(loading => {
+      this.loading = loading;
+    });
   }
 
   onAddRecipe(recipe: Recipe) {
-    this.dashboardService.addRecipe(recipe);
-    this.alertActive = true;
-    setTimeout(() => {
-      this.alertActive = false;
-    }, 1500);
+    this.uiService.alertAction("Successfully added this recipe!", "success");
   }
 
   ngOnDestroy() {
-    this.getRecipesSubscription.unsubscribe();
-    this.loadingSubscription.unsubscribe();
-    this.recipesSubjectSubscription.unsubscribe();
+    if (this.recipesSubjectSubscription) {
+          this.recipesSubjectSubscription.unsubscribe();
+    }
+
+    if (this.loadingSubscription) {
+      this.loadingSubscription.unsubscribe();
+    }
+
   }
 
 }

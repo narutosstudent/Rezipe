@@ -20,7 +20,9 @@ import { AlertComponent } from './alert/alert.component';
   exports: [
     SpinnerComponent,
     RecipeItemComponent,
-    AlertComponent
+    AlertComponent,
+    CommonModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

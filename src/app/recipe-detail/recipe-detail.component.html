@@ -1,4 +1,6 @@
-<section class="detail">
+
+<app-spinner *ngIf="loading"></app-spinner>
+<section class="detail" *ngIf="!loading">
   <h1 class="detail__label"> {{recipe.label}} </h1>
   <div class="detail__wrapper">
     <img [src]="recipe.image" alt="recipe" class="detail__image">

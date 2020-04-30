@@ -1,4 +1,5 @@
-<section class="search">
+<app-spinner *ngIf="loading"></app-spinner>
+<section class="search" *ngIf="!loading">
   <div class="search__box">
     <div class="search__box--wrapper">
       <h1 class="search__box--title">Search</h1>

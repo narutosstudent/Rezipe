@@ -1,25 +1,25 @@
 import { environment } from "./../environments/environment";
 import { Injectable } from '@angular/core';
-import { of, Observable, Subject, BehaviorSubject } from "rxjs";
+import { of, Observable, Subject } from "rxjs";
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Recipe } from './models/recipe.model';
 import {tap, catchError} from "rxjs/operators";
 import { RecipeResponseData } from './models/response-data.model';
+import { UiService } from './shared/ui.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  recipes: Recipe[];
+  private recipes: Recipe[];
   recipesSubject = new Subject<Recipe[]>();
 
-  recipe: Recipe;
+  private recipe: Recipe;
   recipeSubject = new Subject<Recipe>();
 
-  loading = new BehaviorSubject<boolean>(false);
 
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private uiService: UiService, private router: Router) {
     this.recipes = [];
   }
 
@@ -27,10 +27,9 @@ export class RecipeService {
 
   // Fetches the Recipes based on parameters and also sets multiple values into localStorage
   searchRecipes(minCal: number, maxCal: number, name: string ) {
-    this.loading.next(true);
+    this.uiService.loadingStateChanged.next(true);
 
     this.recipes = [];
-
     let searchParams = new HttpParams();
     searchParams = searchParams.append("q", name);
     searchParams = searchParams.append("calories", `${minCal}-${maxCal}`);
@@ -46,26 +45,26 @@ export class RecipeService {
       responseData.hits.forEach(hit => {
         this.recipes.push(hit.recipe);
       });
-
-      localStorage.removeItem("recipes");
-      localStorage.setItem("recipes", JSON.stringify(this.recipes));
-
       this.recipesSubject.next(this.recipes.slice());
-      this.loading.next(false);
+      this.router.navigate(["recipes"]);
+
+      setTimeout(() => {
+        this.uiService.loadingStateChanged.next(false);
+      }, 1500);
     });
   }
 
 
   // Get the recipes
   getRecipes() {
-    const recipes: Recipe[] = JSON.parse(localStorage.getItem("recipes"));
-    return of(recipes);
+    return this.recipes;
   }
 
 
 
   // Retrieve a single http by its uri
   searchRecipe(uri: string) {
+    this.uiService.loadingStateChanged.next(true);
     let searchParams = new HttpParams();
     searchParams = searchParams.append("r", uri);
     searchParams = searchParams.append("app_id", environment.app_id);
@@ -75,10 +74,13 @@ export class RecipeService {
     })
     .pipe(catchError(this.handleError<Recipe>("Search Recipe")))
     .subscribe(responseData => {
+      this.router.navigate(["/recipes/single"]);
       this.recipe = responseData[0];
       this.recipeSubject.next(Object.assign({}, this.recipe));
-      localStorage.removeItem("recipe");
-      localStorage.setItem("recipe", JSON.stringify(this.recipe));
+
+      setTimeout(() => {
+        this.uiService.loadingStateChanged.next(false);
+      }, 1500);
     });
   }
 
@@ -86,10 +88,8 @@ export class RecipeService {
 
   // Get a single recipe
   getRecipe() {
-    const recipe = JSON.parse(localStorage.getItem("recipe"));
-    return of(recipe);
+    return this.recipe;
   }
-
 
 
   // Error handling for Http Requests

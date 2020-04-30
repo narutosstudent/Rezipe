@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../models/recipe.model';
 import { Subscription } from 'rxjs';
+import { UiService } from '../shared/ui.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -12,29 +13,32 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   loading: boolean;
 
-  getRecipeSubscription: Subscription;
   recipeSubscription: Subscription;
+  loadingSubscription: Subscription;
 
-  constructor(private recipeService: RecipeService) {
-    console.log(this.recipe);
-  }
+  constructor(private recipeService: RecipeService, private uiService: UiService) {}
 
   ngOnInit(): void {
+    this.recipe = this.recipeService.getRecipe();
 
-    this.getRecipeSubscription = this.recipeService.getRecipe().subscribe((recipe: Recipe) => {
+    this.recipeSubscription = this.recipeService.recipeSubject.subscribe((recipe: Recipe) => {
       this.recipe = recipe;
       console.log(this.recipe);
     });
 
-    this.recipeSubscription = this.recipeService.recipeSubject.subscribe((recipe: Recipe) => {
-      this.recipe = recipe;
-    })
+    this.uiService.loadingStateChanged.subscribe(isLoading => {
+      this.loading = isLoading;
+    });
 
   }
 
   ngOnDestroy() {
-    this.getRecipeSubscription.unsubscribe();
-    this.recipeSubscription.unsubscribe();
+    if (this.recipeSubscription) {
+      this.recipeSubscription.unsubscribe();
+    }
+    if(this.loadingSubscription) {
+      this.loadingSubscription.unsubscribe();
+    }
   }
 
 }
