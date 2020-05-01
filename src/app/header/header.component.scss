@@ -17,7 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
   }
 
   &__title {
@@ -32,9 +32,15 @@
   &__link {
     text-decoration: none;
     color: black;
-    font-size: 1.6rem;
+    font-weight: 300;
+    font-size: 2rem;
     font-family: "Montserrat";
-    transition: all .3s;
+    transition: all .2s;
+    margin: 0rem 2rem;
+    @include respond(phone) {
+      margin: 0rem;
+      transition: none;
+    }
     &--active {
             color: white;
             background-color: black;
@@ -56,16 +62,100 @@
     justify-content: space-evenly;
     align-items: center;
     &--links {
-      width: 19rem;
+      width: 45rem;
+      overflow: hidden;
+      @include respond(phone) {
+        transition: all .2s;
+        position: fixed;
+        height: 100vh;
+        width: 1vw;
+        flex-direction: column;
+        background-color: rgb(233, 233, 233);
+        z-index: 3000;
+        left: 100%;
+        top: -4%;
+        box-shadow: 0rem 0rem .5rem black;
+        visibility: hidden;
+      }
     }
   }
 }
 
+.hamburger {
+  visibility: hidden;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 5rem;
+  height: 5rem;
+  left: 95%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7000;
+  cursor: pointer;
+  transition: all .5s;
+  @include respond(phone) {
+    visibility: visible;
+  }
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  }
+  &__link {
+    width: 4rem;
+    height: .6rem;
+    background-color: black;
+    box-shadow: 0rem 0rem .3rem black;
+    transition: all .2s;
+  }
+}
+
+.background {
+  position: fixed;
+  top: -4%;
+  left: -5.5%;
+  background-color: rgba(0, 0, 0, 0.719);
+  z-index: 1000;
+  transition: all .2s;
+  height: 1rem;
+  width: 1rem;
+  visibility: hidden;
+}
 
 
+.checkbox {
+  display: none;
+  visibility: hidden;
+}
+
+.checkbox:checked + .hamburger .hamburger__link--2 {
+  visibility: hidden;
+  opacity: 0;
+  display: none;
+}
+
+.checkbox:checked + .hamburger .hamburger__link--1 {
+  transform: translateY(.7rem) rotate(48deg);
+}
+
+.checkbox:checked + .hamburger .hamburger__link--3 {
+  transform: translateY(-1.2rem) rotate(-48deg);
+}
 
 
+.checkbox:checked ~ .nav__box--links {
+  left: 50%;
+  width: 50vw;
+  visibility: visible;
+}
 
-
-
-
+.checkbox:checked ~ .background {
+  height: 100vh;
+  width: 100vw;
+  visibility: visible;
+}

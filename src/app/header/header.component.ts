@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClick() {
+    let check = document.getElementsByClassName("checkbox")[0] as HTMLInputElement;
+    check.checked = false;
+  }
 }

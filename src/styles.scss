@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 // Variables
 $color-black: #000000;
 $color-white: #fff;
@@ -69,9 +68,14 @@ html {
     font-size: 75%;
   }
 
+
 }
 
 body {
   box-sizing: border-box;
   font-weight: 400;
+}
+
+.black {
+  background-color: rgba(0, 0, 0, 0.548);
 }

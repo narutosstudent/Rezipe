@@ -1,13 +1,32 @@
 <nav class="nav">
-  <div class="nav__wrapper">
-    <div class="nav__box">
-          <a routerLink="/" class="nav__title">Rezipe</a>
-          <img src="../../assets/recipe.svg" alt="recipe-icon" class="nav__icon">
-    </div>
+    <div class="nav__wrapper">
+          <div class="nav__box">
+            <a routerLink="/" class="nav__title">Rezipe</a>
+            <img src="../../assets/recipe.svg" alt="recipe-icon" class="nav__icon"></div>
 
-    <div class="nav__box nav__box--links">
-    <a routerLink="/search" routerLinkActive="nav__link--active" [routerLinkActiveOptions]="{exact: true}" class="nav__link">Search</a>
-    <a routerLink="/dashboard" routerLinkActive="nav__link--active" class="nav__link">Dashboard</a>
-    </div>
-  </div>
-</nav>
+            <input type="checkbox" id="navCheck" class="checkbox">
+            
+            <label for="navCheck" class="hamburger">
+              <span class="hamburger__link hamburger__link--1"></span>
+              <span class="hamburger__link hamburger__link--2"></span>
+              <span class="hamburger__link hamburger__link--3"></span>
+            </label>
+
+            <div class="background"></div>
+
+            <div class="nav__box nav__box--links">
+                <a (click)="onClick()" routerLink="/search" routerLinkActive="nav__link--active" class="nav__link">Search</a>
+                <a (click)="onClick()"
+                    routerLink="/register"
+                    routerLinkActive="nav__link--active"
+                    class="nav__link">Register</a>
+                <a (click)="onClick()" routerLink="/login" routerLinkActive="nav__link--active" class="nav__link">Login</a>
+
+                <a (click)="onClick()"
+                    routerLink="/dashboard"
+                    routerLinkActive="nav__link--active"
+                    class="nav__link">Dashboard</a>
+            </div>
+
+        </div>
+    </nav>
