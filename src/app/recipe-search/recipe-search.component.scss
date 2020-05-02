@@ -198,10 +198,17 @@
      }
 }
 
-.ng-invalid.ng-touched input {
-  border: .3rem solid red;
+.border-red {
+  border: .2rem solid red;
 }
 
-.name--red {
+.border-green {
+  border: .2rem solid green;
+}
+
+.input-error {
   color: red;
+  font-family: "Montserrat";
+  font-size: 1.5rem;
+  margin-top: .5rem;
 }

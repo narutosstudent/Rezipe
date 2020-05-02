@@ -1,0 +1,78 @@
+<section class="auth">
+  <app-alert></app-alert>
+  <div class="auth__wrapper">
+    <div class="auth__info">
+      <div class="auth__info__box">
+        <h1 class="auth__info__title">Rezipe</h1>
+         <img src="../../assets/recipe.svg" alt="recipe-icon" class="auth__info__icon">
+      </div>
+      <div class="auth__info__wrapper">
+        <p class="auth__info__text">
+          Add Recipes to your Dashboard, track your Goals & Live a <span class="auth__info__span">healthier</span> Life!
+        </p>
+      </div>
+    </div>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="auth__form">
+      <div class="auth__box">
+        <label class="auth__label">E-Mail</label>
+        <input
+        class="auth__input"
+        type="text"
+        ngModel
+        name="email"
+        placeholder="Your Email"
+        required
+        email
+        #emailInput="ngModel"
+        [ngClass]="{
+          'border-red': emailInput.invalid && emailInput.touched,
+          'border-green': emailInput.valid
+        }">
+        <small class="input-error" *ngIf="emailInput.invalid && emailInput.touched && !emailInput.hasError('required')">E-Mail is invalid</small>
+        <small class="input-error" *ngIf="emailInput.hasError('required') && emailInput.touched">E-Mail is required</small>
+      </div>
+
+      <div class="auth__box">
+        <label class="auth__label">Password</label>
+        <input
+        class="auth__input"
+        type="password"
+        ngModel
+        name="password"
+        placeholder="Your Password"
+        required
+        minlength="6"
+        #passwordInput="ngModel"
+        [ngClass]="{'border-green': passwordInput.valid, 'border-red': passwordInput.touched && passwordInput.invalid}"
+        >
+        <small class="input-error" *ngIf="passwordInput.hasError('required') && passwordInput.touched">Password is required.</small>
+        <small class="input-error" *ngIf="passwordInput.hasError('minlength') && passwordInput.touched">Password must be at least 6 characters long.</small>
+      </div>
+
+      <div class="auth__box" *ngIf="!loginMode">
+        <label class="auth__label">Confirm Password</label>
+        <input
+        class="auth__input"
+        type="password"
+        ngModel
+        name="password2"
+        placeholder="Confirm Your Password"
+        required
+        minlength="6"
+        #password2Input="ngModel"
+        [ngClass]="{
+        'border-red': password2Input.dirty && passwordInput.value !== password2Input.value,
+        'border-green': passwordInput.value === password2Input.value && password2Input.valid && !password2Input.hasError('required')
+          }">
+        <small class="input-error" *ngIf="password2Input.hasError('required') && password2Input.touched">Please confirm your password.</small>
+        <small class="input-error" *ngIf="password2Input.value !== passwordInput.value && password2Input.dirty && !password2Input.hasError('required')">
+          Does not match your current password.
+        </small>
+      </div>
+      <button type="submit" class="auth__button" [disabled]="f.invalid">{{ loginMode ? "Login" : "Register" }} </button>
+      <a href="#" class="auth__switch" (click)="onSwitchAuth($event)">
+        Switch To {{ loginMode ? "Switch To Register" : "Switch to Login" }}
+      </a>
+    </form>
+  </div>
+</section>

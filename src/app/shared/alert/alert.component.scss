@@ -2,7 +2,7 @@
 
 .alert {
   font-family: "Montserrat";
-  font-weight: bold;
+  font-weight: 400;
   font-size: 2rem;
   text-align: center;
   width: 80vw;
@@ -18,10 +18,12 @@
   left: 50%;
   transform: translateX(-50%);
   &--success {
-    background-color: green;
+    background-color: rgb(94, 255, 94);
+    border: .2rem solid green;
   }
   &--danger {
-    background-color: red;
+    background-color: rgb(255, 81, 81);
+    border: .2rem solid red;
   }
   @include respond(phone) {
     letter-spacing: 0rem;

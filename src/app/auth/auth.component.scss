@@ -1,0 +1,237 @@
+@import "../../styles.scss";
+
+.auth {
+  height: 91vh;
+  background-image: url(../../assets/wall-white-img.jpg);
+  &__wrapper {
+    height: 80%;
+    width: 80%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0rem 0rem .9rem black;
+    @include respond(tab-land) {
+      width: 90%;
+      height: 85%;
+    }
+    @include respond(tab-port) {
+      width: 97%;
+      height: 90%;
+    }
+  }
+  &__form {
+    height: 100%;
+    width: 50%;
+    background-color: rgba(223, 210, 210, 0.726);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    height: 20%;
+    width: 80%;
+    border: .2rem solid black;
+    background-color: white;
+    box-shadow: 0rem 0rem .5rem black;
+    @include respond(phone) {
+      align-items: center;
+      width: 95%;
+    }
+  }
+
+  &__input {
+    width: 70%;
+    background-color: white;
+    color: black;
+    height: 4rem;
+    border: .2rem solid black;
+    border-radius: .2rem;
+    font-family: "Montserrat";
+    font-weight: 400;
+    padding-left: 2rem;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    box-shadow: 0rem 0rem .5rem black;
+    @include respond(tab-port) {
+      width: 90%;
+    }
+    @include respond(phone) {
+      width: 100%;
+      text-align: center;
+      padding-left: 0rem;
+      margin-left: 0rem;
+    }
+    &::placeholder {
+      color: black;
+      font-size: 1.5rem;
+      padding-left: 2rem;
+      font-family: "Montserrat";
+      @include respond(phone) {
+        padding-left: 0rem;
+      }
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__label {
+    margin-bottom: 1rem;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 2.5rem;
+    color: black;
+    margin-left: 1rem;
+    @include respond(phone) {
+      font-size: 2rem;
+      margin-left: 0rem;
+    }
+  }
+
+  &__button {
+    padding: 1.3rem 4rem;
+    border-radius: .2rem;
+    background-color: white;
+    border: .2rem solid black;
+    font-family: "Merriweather";
+    font-weight: bold;
+    font-size: 2rem;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0rem 0rem .3rem black;
+    transition: all .3s;
+    &:hover {
+      background-color: black;
+      color: white;
+      transform: translateY(-1rem) scale(1.05);
+    }
+    &:disabled {
+      opacity: 0.4;
+      cursor: auto;
+      &:hover {
+        color: black;
+        background-color: white;
+        transform: translateY(0rem) scale(1);
+      }
+    }
+    &:active {
+      transform: translateY(-2rem) scale(.7);
+    }
+
+  }
+  &__switch {
+      font-family: "Montserrat";
+      font-size: 1.5rem;
+      color: rgb(42, 100, 167);
+      text-decoration: underline;
+      &:hover {
+        color: rgb(0, 0, 0);
+      }
+   }
+
+
+
+  &__info {
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(to top, black, rgba(0, 0, 0, 0.63)), url(../../assets/food-img-auth.jpg);
+    background-position: center;
+    background-size: cover;
+
+    &__box {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 50%;
+      height: 10%;
+      background-color: rgba(255, 255, 255, 0.513);
+      position: relative;
+      transform: translate(-50%, -50%);
+      top: 20%;
+      left: 50%;
+      box-shadow: 0rem 0rem .5rem black;
+      @include respond(phone) {
+        width: 90%;
+      }
+    }
+
+    &__icon {
+      height: 5rem;
+    }
+
+    &__title {
+      font-size: 4rem;
+      color: black;
+      font-family: cursive;
+      font-weight: 300;
+    }
+
+    &__wrapper {
+      height: 50%;
+      width: 90%;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: .1rem solid white;
+      @include respond(phone) {
+        height: 70%;
+        width: 95%;
+        top: 53%;
+      }
+    }
+
+    &__span {
+      background-color: rgb(14, 114, 14);
+      color: white;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    &__text {
+      font-family: "Montserrat";
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      font-size: 3rem;
+      line-height: 2;
+      @include respond(phone) {
+        font-size: 2.5rem;
+      }
+    }
+
+  }
+}
+
+.border-red {
+  border: .2rem solid red;
+}
+
+.border-green {
+  border: .2rem solid green;
+}
+
+.input-error {
+  color: red;
+  font-family: "Montserrat";
+  font-size: 1.5rem;
+  margin-top: .5rem;
+  margin-left: 1rem;
+  @include respond(phone) {
+    margin-left: 0rem;
+    text-align: center;
+  }
+}
+
+

@@ -47,7 +47,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   onAddRecipe(recipe: Recipe) {
-    this.uiService.alertAction("Successfully added this recipe!", "success");
+    this.uiService.alertAction("Successfully added this recipe!", "danger");
   }
 
   ngOnDestroy() {
