@@ -33,8 +33,17 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   this.searchForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
-    minCalories: ["", Validators.required],
-    maxCalories: ["", Validators.required]
+    minCalories: ["",
+    [
+      Validators.required,
+      Validators.min(0)
+    ]
+  ],
+    maxCalories: ["", [
+      Validators.required,
+      Validators.min(0)
+    ]
+  ]
   });
 
   }
@@ -61,7 +70,7 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     return +this.searchForm.controls.minCalories.value < 0;
   }
 
-    get maxCaloriesNotNegative() {
+  get maxCaloriesNotNegative() {
     return +this.searchForm.controls.maxCalories.value < 0;
   }
 
