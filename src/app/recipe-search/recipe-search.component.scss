@@ -167,7 +167,7 @@
        padding: 1rem 5rem;
        background-color: transparent;
        outline: none;
-       border: .4rem solid black;
+       border: .2rem solid black;
        color: black;
        font-weight: bold;
        font-family: "Merriweather";
@@ -175,9 +175,10 @@
        transition: all .3s;
        font-weight: bold;
        letter-spacing: .2rem;
+       box-shadow: 0rem 0rem .4rem;
        &:hover {
          background-color: black;
-         border: .4rem solid white;
+         border: .2rem solid white;
          color: white;
          transform: translateY(-.5rem) scale(1.1);
        }

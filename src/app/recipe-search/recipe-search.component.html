@@ -26,7 +26,7 @@
 
       <small
         class="input-error"
-        *ngIf="f.name.invalid && f.name.touched">
+        *ngIf="f.name.invalid && f.name.dirty || f.name.touched && !f.name.valid">
         Must be least 3 Characters long!
       </small>
         <label class="search__label search__label--title" for="title">Name</label>
@@ -56,6 +56,7 @@
           required
           [ngClass]="{
             'border-red': f.maxCalories.errors?.required && f.maxCalories.touched,
+
             'border-green': !f.maxCalories.errors?.required
           }"
           >

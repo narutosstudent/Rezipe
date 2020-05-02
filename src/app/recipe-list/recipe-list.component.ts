@@ -17,12 +17,24 @@ import { UiService } from '../shared/ui.service';
 
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
+
   loading = false;
 
   recipesSubjectSubscription: Subscription;
   loadingSubscription: Subscription;
 
   buttonActionName: string = "Add";
+
+  // Pagination Related
+  currentPage: number = 1;
+  recipesPerPage: number = 10;
+
+  // Get current recipes
+  indexOfLastRecipe: number;
+  indexOfFirstRecipe: number;
+  currentRecipes: Recipe[];
+
+
 
 
   constructor(
@@ -44,6 +56,24 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.loadingSubscription = this.uiService.loadingStateChanged.subscribe(loading => {
       this.loading = loading;
     });
+
+
+    // Pagination Related
+    this.indexOfLastRecipe = this.currentPage * this.recipesPerPage;
+
+    this.indexOfFirstRecipe = this.indexOfLastRecipe - this.recipesPerPage;
+
+    this.currentRecipes = this.recipes.slice(this.indexOfFirstRecipe, this.indexOfLastRecipe);
+  }
+
+  onPaginate(paginateNumber: number) {
+    this.currentPage = paginateNumber;
+    
+    this.indexOfLastRecipe = this.currentPage * this.recipesPerPage;
+
+    this.indexOfFirstRecipe = this.indexOfLastRecipe - this.recipesPerPage;
+
+    this.currentRecipes = this.recipes.slice(this.indexOfFirstRecipe, this.indexOfLastRecipe);
   }
 
   onAddRecipe(recipe: Recipe) {

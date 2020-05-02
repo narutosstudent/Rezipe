@@ -1,0 +1,9 @@
+<ul class="pagination">
+  <div class="pagination__wrapper">
+    <li *ngFor="let number of pageNumbers" class="pagination__item">
+      <a (click)="onPaginate(number, $event)" href="!#" class="pagination__link">
+        {{number}}
+      </a>
+    </li>
+  </div>
+</ul>

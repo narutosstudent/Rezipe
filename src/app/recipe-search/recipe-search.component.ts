@@ -57,6 +57,14 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     return this.searchForm.controls;
   }
 
+  get minCaloriesNotNegative() {
+    return +this.searchForm.controls.minCalories.value < 0;
+  }
+
+    get maxCaloriesNotNegative() {
+    return +this.searchForm.controls.maxCalories.value < 0;
+  }
+
   ngOnDestroy() {
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();

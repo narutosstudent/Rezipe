@@ -4,6 +4,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { RouterModule } from '@angular/router';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { AlertComponent } from './alert/alert.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 
@@ -11,7 +12,8 @@ import { AlertComponent } from './alert/alert.component';
   declarations: [
     SpinnerComponent,
     RecipeItemComponent,
-    AlertComponent
+    AlertComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { AlertComponent } from './alert/alert.component';
     SpinnerComponent,
     RecipeItemComponent,
     AlertComponent,
+    PaginationComponent,
     CommonModule,
     RouterModule
   ]

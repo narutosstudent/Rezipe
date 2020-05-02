@@ -1,0 +1,71 @@
+@import "../../../styles.scss";
+
+
+.pagination {
+  position: relative;
+  width: 80vw;
+  height: 8vh;
+  background-color: rgb(235, 233, 233);
+  list-style: none;
+  margin: 2rem 0rem;
+  @include respond(tab-port) {
+    width: 90vw;
+  }
+  @include respond(phone) {
+    width: 95vw;
+    height: 12vh;
+  }
+  &__wrapper {
+    margin: 1rem 0rem;
+    width: 90%;
+    height: 100%;
+    box-shadow: 0rem 0rem .4rem black;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: .2rem;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+    @include respond(phone) {
+      flex-wrap: wrap;
+    }
+  }
+  &__item {
+    margin: 0rem 1rem;
+    @include respond(phone) {
+      margin: .5rem .5rem;
+    }
+  }
+  &__link {
+    padding: 1.3rem;
+    background-color: white;
+    color: black;
+    border: .2rem solid black;
+    text-decoration: none;
+    font-family: "Montserrat";
+    border-radius: .2rem;
+    box-shadow: 0rem 0rem .4rem black;
+    transition: all .3s;
+    font-size: 1.4rem;
+    font-weight: 500;
+    @include respond(tab-port) {
+      font-size: 1.6rem;
+      padding: 1.5rem;
+    }
+    @include respond(phone) {
+      font-size: 1.5rem;
+      padding: 1rem;
+    }
+    &:hover {
+      background-color: black;
+      color: white;
+      transform: scale(1.1);
+      border: .2rem solid white;
+    }
+  }
+}

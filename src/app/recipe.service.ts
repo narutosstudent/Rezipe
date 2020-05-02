@@ -36,7 +36,7 @@ export class RecipeService {
     searchParams = searchParams.append("app_id", environment.app_id);
     searchParams = searchParams.append("app_key", environment.app_key);
     searchParams = searchParams.append("from", String(0));
-    searchParams = searchParams.append("to", String(75));
+    searchParams = searchParams.append("to", String(100));
     this.http.get<RecipeResponseData>("https://api.edamam.com/search", {
       params: searchParams
     })
@@ -47,10 +47,9 @@ export class RecipeService {
       });
       this.recipesSubject.next(this.recipes.slice());
       this.router.navigate(["/recipes"]);
-
       setTimeout(() => {
         this.uiService.loadingStateChanged.next(false);
-      }, 1000);
+      }, 2000);
     });
   }
 
