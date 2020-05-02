@@ -16,11 +16,7 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
   loadingSubscription: Subscription;
 
   // initilization of the form
-  searchForm = this.fb.group({
-    name: ["", [Validators.required, Validators.minLength(3)]],
-    minCalories: ["0", Validators.required],
-    maxCalories: ["1500", Validators.required]
-  });
+  searchForm = this.fb.group({});
 
   constructor(
     private recipeService: RecipeService,
@@ -33,6 +29,14 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     this.uiService.loadingStateChanged.subscribe(isLoading => {
       this.loading = isLoading;
     });
+
+
+  this.searchForm = this.fb.group({
+    name: ["", [Validators.required, Validators.minLength(3)]],
+    minCalories: ["", Validators.required],
+    maxCalories: ["", Validators.required]
+  });
+
   }
 
 
@@ -41,7 +45,16 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     const minCalories = +this.searchForm.get("minCalories").value;
     const maxCalories = +this.searchForm.get("maxCalories").value;
     const name = this.searchForm.get("name").value;
-    this.recipeService.searchRecipes(minCalories, maxCalories, name);
+    if (minCalories > maxCalories) {
+      return this.uiService.alertAction("Min Calories can not be greater than Max Calories", "danger");
+    } else {
+      this.recipeService.searchRecipes(minCalories, maxCalories, name);
+    }
+  }
+
+  // access the controls easier
+  get f() {
+    return this.searchForm.controls;
   }
 
   ngOnDestroy() {

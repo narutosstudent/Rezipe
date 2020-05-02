@@ -1,5 +1,6 @@
 <app-spinner *ngIf="loading"></app-spinner>
 <section class="search" *ngIf="!loading">
+  <app-alert></app-alert>
   <div class="search__box">
     <div class="search__box--wrapper">
       <h1 class="search__box--title">Search</h1>
@@ -17,16 +18,19 @@
         formControlName="name"
         required
         minlength="3"
+        [ngClass]="{
+        'border-red': f.name.errors?.minlength || f.name.errors?.required && f.name.touched,
+        'border-green': !f.name.errors?.minlength && f.name.dirty && !f.name.errors?.required
+        }"
         >
 
       <small
         class="input-error"
-        [ngClass]="{'name--red': !searchForm['controls'].name.valid}"
-        >
+        *ngIf="f.name.invalid && f.name.touched">
         Must be least 3 Characters long!
       </small>
-
         <label class="search__label search__label--title" for="title">Name</label>
+
       </div>
       <div class="search__calories--box">
         <div class="search__group search__group--calories">
@@ -35,8 +39,13 @@
           type="number"
           class="search__input search__input--calories"
           formControlName="minCalories"
-          required>
+          required
+          [ngClass]="{
+            'border-red': f.minCalories.errors?.required && f.minCalories.touched,
+            'border-green': !f.minCalories.errors?.required
+          }">
           <label class="search__label" for="minCalories">Min</label>
+          <small class="input-error" *ngIf="f.minCalories.errors?.required && f.minCalories.touched">Min Calories are required</small>
         </div>
         <div class="search__group search__group--calories">
           <input
@@ -45,8 +54,13 @@
           class="search__input search__input--calories"
           formControlName="maxCalories"
           required
+          [ngClass]="{
+            'border-red': f.maxCalories.errors?.required && f.maxCalories.touched,
+            'border-green': !f.maxCalories.errors?.required
+          }"
           >
           <label class="search__label" for="maxCalories">Max</label>
+          <small class="input-error" *ngIf="f.maxCalories.errors?.required && f.maxCalories.touched">Max Calories are required</small>
         </div>
       </div>
       <button type="submit" class="search__button" [disabled]="!searchForm.valid">Search</button>
