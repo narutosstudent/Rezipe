@@ -1,6 +1,6 @@
-<section class="recipes">
+<section class="recipes" *ngIf="recipes || recipes.length">
+  <h1 class="recipes__none" *ngIf="!recipes.length || !recipes">You currently have no recipes!</h1>
   <app-alert></app-alert>
-<h1 class="recipes__none" *ngIf="!recipes.length || !recipes">You currently have no recipes!</h1>
   <app-recipe-item *ngFor="let recipe of recipes; let i = index;"
    [recipe]="recipe"
    [actionName]="buttonActionName"

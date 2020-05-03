@@ -61,7 +61,7 @@
         minlength="6"
         #password2Input="ngModel"
         [ngClass]="{
-        'border-red': password2Input.dirty && passwordInput.value !== password2Input.value,
+        'border-red': password2Input.dirty && passwordInput.value !== password2Input.value || (password2Input.hasError('required') && password2Input.touched),
         'border-green': passwordInput.value === password2Input.value && password2Input.valid && !password2Input.hasError('required')
           }">
         <small class="input-error" *ngIf="password2Input.hasError('required') && password2Input.touched">Please confirm your password.</small>

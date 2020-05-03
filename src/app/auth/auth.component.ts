@@ -19,8 +19,12 @@ export class AuthComponent implements OnInit {
     const email = form.form.value.email;
     const password = form.form.value.password;
     const password2 = form.form.value.password2;
-    if (password !== password2) {
-      return this.uiService.alertAction("Passwords Do Not Match", "danger");
+    if (!this.loginMode) {
+      if (password !== password2) {
+        return this.uiService.alertAction("Passwords Do Not Match", "danger");
+      }
+    } else {
+      
     }
 
 
