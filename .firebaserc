@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ng-rezipe-3f6c9": {
+      "hosting": {
+        "rezipe": [
+          "ng-rezipe-3f6c9"
+        ]
+      }
+    }
+  }
+}

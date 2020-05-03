@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "rezipe",
+      "public": "dist/rezipe",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
