@@ -1,7 +1,6 @@
-import { ReactiveFormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
@@ -19,7 +18,6 @@ import { environment } from 'src/environments/environment';
     HeaderComponent
   ],
   imports: [
-    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     SharedModule,

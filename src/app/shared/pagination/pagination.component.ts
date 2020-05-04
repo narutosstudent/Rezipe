@@ -27,6 +27,4 @@ export class PaginationComponent implements OnInit {
       event.preventDefault();
       this.paginate.emit(paginateNumber);
     }
-
-
 }

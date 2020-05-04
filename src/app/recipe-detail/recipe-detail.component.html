@@ -1,10 +1,12 @@
 
 <app-spinner *ngIf="loading"></app-spinner>
 <section class="detail" *ngIf="!loading">
+  <app-alert></app-alert>
   <h1 class="detail__label"> {{recipe.label}} </h1>
   <div class="detail__wrapper">
     <img [src]="recipe.image" alt="recipe" class="detail__image">
       <div class="detail__box">
+        <i (click)="onAddRecipe()" class="fas fa-plus detail__plus" *ngIf="isAuth"></i>
         <h3 class="detail__calories"> Calories: {{recipe.calories | number: "1.0-0"}} </h3>
         <div *ngIf="recipe.dietLabels" class="details__labels">
           <h3 class="detail__diet" *ngFor="let diet of recipe.dietLabels"> {{diet}} <i class="fas fa-check"></i> </h3>

@@ -8,7 +8,9 @@
   [totalRecipes]="recipes.length"
   *ngIf="recipes && recipes.length"></app-pagination>
   <app-recipe-item
-  *ngFor="let recipe of currentRecipes" [recipe]="recipe"
+  *ngFor="let recipe of currentRecipes"
+  [recipe]="recipe"
   [actionName]="buttonActionName"
-  (buttonAction)="onAddRecipe($event)"></app-recipe-item>
+  (buttonAction)="onAddRecipe($event)"
+  [isAuth]="isAuth"></app-recipe-item>
 </section>

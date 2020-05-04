@@ -15,16 +15,27 @@
             <div class="background"></div>
 
             <div class="nav__box nav__box--links">
-                <a (click)="onClick()" routerLink="/search" routerLinkActive="nav__link--active" class="nav__link">Search</a>
+                <a (click)="onClick()"
+                routerLink="/search"
+                routerLinkActive="nav__link--active"
+                class="nav__link">Search</a>
+
                 <a (click)="onClick()"
                     routerLink="/auth"
                     routerLinkActive="nav__link--active"
-                    class="nav__link">Authentication</a>
+                    class="nav__link"
+                    *ngIf="!isAuth">Login</a>
 
                 <a (click)="onClick()"
                     routerLink="/dashboard"
                     routerLinkActive="nav__link--active"
-                    class="nav__link">Dashboard</a>
+                    class="nav__link"
+                    *ngIf="isAuth">Dashboard</a>
+
+                <a (click)="onLogout()"
+                class="nav__link"
+                *ngIf="isAuth"
+                > Logout <i class="fas fa-sign-out-alt"></i> </a>
             </div>
 
         </div>

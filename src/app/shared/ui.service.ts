@@ -26,7 +26,7 @@ export class UiService {
     this.alertsChanged.next(this.alerts);
     setTimeout(() => {
       this.removeAlert(id);
-    }, 1500);
+    }, 2000);
 }
 
   removeAlert(id: string) {

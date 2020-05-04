@@ -12,6 +12,9 @@ import { UiService } from '../shared/ui.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
+  isLoading = false;
+
+  isLoadingSubscription: Subscription;
 
   buttonActionName: string = "Delete";
 
@@ -24,10 +27,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
     ngOnInit(): void {
-
+      this.isLoadingSubscription = this.uiService.loadingStateChanged.subscribe(isLoading => {
+        this.isLoading = isLoading;
+      });
   }
 
   ngOnDestroy() {
+    if (this.isLoadingSubscription) {
+      this.isLoadingSubscription.unsubscribe();
+    }
   }
 
 

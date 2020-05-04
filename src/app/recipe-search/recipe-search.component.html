@@ -43,12 +43,12 @@
           min="0"
           [ngClass]="{
             'border-red': f.minCalories.errors?.required && f.minCalories.touched || f.minCalories.hasError('min'),
-            'border-dark-red': +f.minCalories.value > f.maxCalories.value,
+            'border-dark-red': +f.minCalories.value > f.maxCalories.value && f.maxCalories.value,
             'border-green': !f.minCalories.errors?.required && f.minCalories.valid && +f.minCalories.value < +f.maxCalories.value
           }">
           <label class="search__label" for="minCalories">Min</label>
-          <small class="input-error" *ngIf="f.minCalories.errors?.required && f.minCalories.touched">Min Calories are required</small>
-          <small class="input-error" *ngIf="+f.minCalories.value > +f.maxCalories.value">Max Calories must be greater.</small>
+          <small class="input-error" *ngIf="f.minCalories.errors?.required && f.minCalories.touched">Min Calories are required.</small>
+          <small class="input-error" *ngIf="+f.minCalories.value > +f.maxCalories.value && f.maxCalories.value">Max Calories must be greater.</small>
           <small class="input-error" *ngIf="f.minCalories.hasError('min')">No negative numbers!</small>
         </div>
         <div class="search__group search__group--calories">
@@ -61,14 +61,14 @@
           min="0"
           [ngClass]="{
             'border-red': f.maxCalories.errors?.required && f.maxCalories.touched || f.maxCalories.hasError('min'),
-            'border-dark-red': +f.minCalories.value > +f.maxCalories.value,
+            'border-dark-red': +f.minCalories.value > +f.maxCalories.value && f.maxCalories.value,
             'border-green': !f.maxCalories.errors?.required && f.maxCalories.valid && +f.minCalories.value <
               +f.maxCalories.value
           }"
           >
           <label class="search__label" for="maxCalories">Max</label>
-          <small class="input-error" *ngIf="f.maxCalories.errors?.required && f.maxCalories.touched">Max Calories are required</small>
-          <small class="input-error" *ngIf="+f.minCalories.value > +f.maxCalories.value">Max Calories must be greater.</small>
+          <small class="input-error" *ngIf="f.maxCalories.errors?.required && f.maxCalories.touched">Max Calories are required.</small>
+          <small class="input-error" *ngIf="+f.minCalories.value > +f.maxCalories.value && f.maxCalories.value">Max Calories must be greater.</small>
           <small class="input-error" *ngIf="f.maxCalories.hasError('min')">No negative numbers!</small>
         </div>
       </div>

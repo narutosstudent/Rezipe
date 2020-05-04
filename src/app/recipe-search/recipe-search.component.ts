@@ -26,11 +26,12 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.uiService.loadingStateChanged.subscribe(isLoading => {
+    // loading state
+    this.loadingSubscription = this.uiService.loadingStateChanged.subscribe(isLoading => {
       this.loading = isLoading;
     });
 
-
+    // initalizing the form
   this.searchForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
     minCalories: ["",
@@ -61,23 +62,17 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  // access the controls easier
+  // access the controls
   get f() {
     return this.searchForm.controls;
   }
 
-  get minCaloriesNotNegative() {
-    return +this.searchForm.controls.minCalories.value < 0;
-  }
-
-  get maxCaloriesNotNegative() {
-    return +this.searchForm.controls.maxCalories.value < 0;
-  }
-
   ngOnDestroy() {
+
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();
     }
+
   }
 
 

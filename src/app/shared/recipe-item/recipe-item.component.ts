@@ -12,8 +12,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./recipe-item.component.scss']
 })
 export class RecipeItemComponent implements OnInit, OnDestroy {
-  @Input() recipe: Recipe = null;
-  @Input() actionName: string = "";
+  @Input() recipe: Recipe;
+  @Input() isAuth = false;
+  @Input() actionName = "";
   @Output() buttonAction = new EventEmitter<Recipe>();
 
   isLoading = false;
