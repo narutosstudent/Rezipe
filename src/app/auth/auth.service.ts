@@ -4,15 +4,17 @@ import { AuthData } from './auth-data.model';
 import { Router } from '@angular/router';
 import { UiService } from '../shared/ui.service';
 import { Subject } from 'rxjs';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   authChange = new Subject<boolean>();
+  userIdSubject = new Subject<any>();
   private isAuthenticated = false;
 
-  constructor(public auth: AngularFireAuth, private router: Router, private uiService: UiService) { }
+  constructor(public auth: AngularFireAuth, private router: Router, private uiService: UiService) {}
 
 
   initAuthListener() {
@@ -21,7 +23,6 @@ export class AuthService {
         this.authChange.next(true);
         this.isAuthenticated = true;
         this.router.navigate(["/dashboard"]);
-        console.log(user);
       } else {
         this.authChange.next(false);
         this.isAuthenticated = false;
@@ -42,7 +43,7 @@ export class AuthService {
     .catch(error => {
       this.uiService.loadingStateChanged.next(false);
       this.uiService.alertAction(error.message, "danger");
-    })
+    });
   }
 
   login(authData: AuthData) {
@@ -56,7 +57,18 @@ export class AuthService {
     .catch(error => {
       this.uiService.loadingStateChanged.next(false);
       this.uiService.alertAction(error.message, "danger");
+    });
+  }
+
+  getCurrentUser(): any {
+    this.auth.currentUser.then(user => {
+      if (user) {
+        this.userIdSubject.next(user.uid);
+      }
     })
+    .catch(error => {
+      console.log(error.message);
+    });
   }
 
   logout() {

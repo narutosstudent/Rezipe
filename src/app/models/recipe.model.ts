@@ -65,5 +65,6 @@ export interface Recipe {
   totalNutrients: NutrientInfo[],
   totalDaily: NutrientInfo[],
   dietLabels?: DietLabel[],
-  healthLabels?: HealthLabel[]
+  healthLabels?: HealthLabel[],
+  userId?: string | null,
 }

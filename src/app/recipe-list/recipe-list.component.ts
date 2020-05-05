@@ -59,8 +59,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       this.recipes = recipes;
     });
 
-    // Auth state
+    // Getting current user's id
+    this.authService.getCurrentUser();
 
+    // Auth state
     this.isAuth = this.authService.isAuth();
 
     this.authSubscription = this.authService.authChange.subscribe(isAuth => {
@@ -94,7 +96,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   // add recipe
   onAddRecipe(recipe: Recipe) {
-    this.uiService.alertAction("Successfully added this recipe!", "danger");
+    this.uiService.alertAction("Successfully added this recipe!", "success");
+    this.dashboardService.addRecipe(recipe);
   }
 
   // Unsubscribe (Subscriptions)

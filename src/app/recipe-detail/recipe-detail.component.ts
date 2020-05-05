@@ -4,6 +4,7 @@ import { Recipe } from '../models/recipe.model';
 import { Subscription } from 'rxjs';
 import { UiService } from '../shared/ui.service';
 import { AuthService } from '../auth/auth.service';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -20,7 +21,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   isAuth = false;
 
-  constructor(private recipeService: RecipeService, private uiService: UiService, private authService: AuthService) {}
+  constructor(private recipeService: RecipeService, private uiService: UiService, private authService: AuthService, private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     // recipe
@@ -30,6 +31,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       this.recipe = recipe;
       console.log(this.recipe);
     });
+
+    // get current user's id
+    this.authService.getCurrentUser();
 
     // auth state
     this.isAuth = this.authService.isAuth();
@@ -46,6 +50,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   onAddRecipe() {
     this.uiService.alertAction("Successfully added recipe to your dashboard!", "success");
+    this.dashboardService.addRecipe(this.recipe);
   }
 
   // unsubscribe (subscriptions)
