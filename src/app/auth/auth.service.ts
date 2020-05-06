@@ -38,7 +38,7 @@ export class AuthService {
     .then(result => {
       setTimeout(() => {
         this.uiService.loadingStateChanged.next(false);
-      }, 500);
+      }, 300);
     })
     .catch(error => {
       this.uiService.loadingStateChanged.next(false);
@@ -52,7 +52,7 @@ export class AuthService {
     .then(result => {
       setTimeout(() => {
         this.uiService.loadingStateChanged.next(false);
-      }, 500);
+      }, 300);
     })
     .catch(error => {
       this.uiService.loadingStateChanged.next(false);
@@ -63,7 +63,9 @@ export class AuthService {
   getCurrentUser(): any {
     this.auth.currentUser.then(user => {
       if (user) {
+        console.log(user.uid);
         this.userIdSubject.next(user.uid);
+        return user.uid;
       }
     })
     .catch(error => {

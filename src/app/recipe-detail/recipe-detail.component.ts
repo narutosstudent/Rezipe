@@ -18,10 +18,20 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipeSubscription: Subscription;
   loadingSubscription: Subscription;
   authSubscription: Subscription;
+  userIdSubscription: Subscription;
 
   isAuth = false;
 
-  constructor(private recipeService: RecipeService, private uiService: UiService, private authService: AuthService, private dashboardService: DashboardService) {}
+  id: string;
+
+  constructor(
+    private recipeService: RecipeService,
+    private uiService: UiService,
+    private authService: AuthService,
+    private dashboardService: DashboardService) {
+          // get current user's id
+          this.authService.getCurrentUser();
+    }
 
   ngOnInit(): void {
     // recipe
@@ -29,11 +39,12 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
     this.recipeSubscription = this.recipeService.recipeSubject.subscribe((recipe: Recipe) => {
       this.recipe = recipe;
-      console.log(this.recipe);
     });
 
-    // get current user's id
-    this.authService.getCurrentUser();
+    // user id
+    this.userIdSubscription = this.authService.userIdSubject.subscribe(userId => {
+      this.id = userId;
+    });
 
     // auth state
     this.isAuth = this.authService.isAuth();
@@ -50,7 +61,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   onAddRecipe() {
     this.uiService.alertAction("Successfully added recipe to your dashboard!", "success");
-    this.dashboardService.addRecipe(this.recipe);
+    this.dashboardService.addRecipe(this.recipe, this.id);
   }
 
   // unsubscribe (subscriptions)
@@ -63,6 +74,10 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     }
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
+    }
+
+    if (this.userIdSubscription) {
+      this.userIdSubscription.unsubscribe();
     }
   }
 

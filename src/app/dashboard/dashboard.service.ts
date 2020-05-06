@@ -3,42 +3,70 @@ import { Recipe } from '../models/recipe.model';
 import { Subject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { UiService } from '../shared/ui.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
   private recipesCollection: AngularFirestoreCollection<Recipe>;
-  private userId: any;
+  private userRecipesCollection: AngularFirestoreCollection<Recipe>;
+  private userRecipes: Recipe[];
 
-  recipes: Observable<Recipe[]>;
+  recipesSubject = new Subject<Recipe[]>();
 
-  constructor(private authService: AuthService, private afs: AngularFirestore) {
+  constructor(
+    private authService: AuthService,
+    private afs: AngularFirestore,
+    private uiService: UiService
+    ) {
+
     this.recipesCollection = this.afs.collection<Recipe>("recipes");
-    this.recipes = this.recipesCollection.valueChanges();
-    this.authService.userIdSubject.subscribe(userId => {
-      this.userId = userId;
-    });
 
-    console.log(this.recipesCollection);
-    console.log(this.userId);
-    console.log(this.recipes);
+    this.userRecipes = [];
   }
 
-  addRecipe(recipe: Recipe) {
+  addRecipe(recipe: Recipe, id: string) {
     const recipeToSave: Recipe = {
-      ...recipe,
-      userId: this.userId
+      label: recipe.label,
+      uri: recipe.uri,
+      ingredients: recipe.ingredients,
+      image: recipe.image,
+      cautions: recipe.cautions,
+      calories: recipe.calories,
+      healthLabels: recipe.healthLabels,
+      dietLabels: recipe.dietLabels,
+      userId: id
     };
     this.recipesCollection.add(recipeToSave);
-    console.log(this.recipesCollection);
-  }
-
-  getUserRecipes() {
-
   }
 
 
+  fetchUserRecipes(id: string) {
+    this.uiService.loadingStateChanged.next(true);
+    this.userRecipesCollection = this.afs.collection<Recipe>("recipes", ref => ref.where("userId", "==", id));
+
+    this.userRecipesCollection.snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as Recipe;
+          const id = a.payload.doc.id;
+          return {id, ...data};
+        }
+        ))
+        ).subscribe((recipes: Recipe[]) => {
+          this.userRecipes = recipes;
+          console.log(this.userRecipes);
+          this.recipesSubject.next([...this.userRecipes]);
+          setTimeout(() => {
+            this.uiService.loadingStateChanged.next(false);
+          }, 200);
+    });
+  }
+
+  deleteRecipe(id: string) {
+
+  }
 
 
 

@@ -24,6 +24,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   authSubscription: Subscription;
   recipesSubjectSubscription: Subscription;
   loadingSubscription: Subscription;
+  userIdSubscription: Subscription;
 
   buttonActionName: string = "Add";
 
@@ -37,6 +38,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   indexOfFirstRecipe: number;
   currentRecipes: Recipe[];
 
+  // user id
+  id: string;
+
 
 
 
@@ -47,10 +51,15 @@ export class RecipeListComponent implements OnInit, OnDestroy {
               private authService: AuthService
               ) {
 
-    this.recipes = [];
+              this.recipes = [];
+              this.authService.getCurrentUser();
   }
 
   ngOnInit(): void {
+    // user id
+    this.userIdSubscription = this.authService.userIdSubject.subscribe(userId => {
+      this.id = userId;
+    });
 
     // the recipes
     this.recipes = this.recipeService.getRecipes();
@@ -58,9 +67,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipesSubjectSubscription = this.recipeService.recipesSubject.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
     });
-
-    // Getting current user's id
-    this.authService.getCurrentUser();
 
     // Auth state
     this.isAuth = this.authService.isAuth();
@@ -97,7 +103,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   // add recipe
   onAddRecipe(recipe: Recipe) {
     this.uiService.alertAction("Successfully added this recipe!", "success");
-    this.dashboardService.addRecipe(recipe);
+    this.dashboardService.addRecipe(recipe, this.id);
   }
 
   // Unsubscribe (Subscriptions)
@@ -112,6 +118,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();
+    }
+
+    if (this.userIdSubscription) {
+      this.userIdSubscription.unsubscribe();
     }
 
   }

@@ -2,8 +2,9 @@
 <section class="recipes" *ngIf="recipes || recipes.length && !isLoading">
   <h1 class="recipes__none" *ngIf="!recipes.length || !recipes">You currently have no recipes!</h1>
   <app-alert></app-alert>
-  <app-recipe-item *ngFor="let recipe of recipes; let i = index;"
+  <app-recipe-item *ngFor="let recipe of recipes"
    [recipe]="recipe"
    [actionName]="buttonActionName"
-   ></app-recipe-item>
+   [isAuth]="true"
+   (buttonAction)="onRecipeDelete(recipe.id)"></app-recipe-item>
 </section>
