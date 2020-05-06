@@ -1,42 +1,49 @@
 <nav class="nav">
     <div class="nav__wrapper">
-          <div class="nav__box">
+        <div class="nav__box">
             <a routerLink="/" class="nav__title">Rezipe</a>
             <img src="../../assets/recipe.svg" alt="recipe-icon" class="nav__icon"></div>
 
             <input type="checkbox" id="navCheck" class="checkbox">
 
-            <label for="navCheck" class="hamburger">
-              <span class="hamburger__link hamburger__link--1"></span>
-              <span class="hamburger__link hamburger__link--2"></span>
-              <span class="hamburger__link hamburger__link--3"></span>
-            </label>
+                <label for="navCheck" class="hamburger">
+                    <span class="hamburger__link hamburger__link--1"></span>
+                    <span class="hamburger__link hamburger__link--2"></span>
+                    <span class="hamburger__link hamburger__link--3"></span>
+                </label>
 
-            <div class="background"></div>
+                <div class="background"></div>
 
-            <div class="nav__box nav__box--links">
-                <a (click)="onClick()"
-                routerLink="/search"
-                routerLinkActive="nav__link--active"
-                class="nav__link">Search</a>
+                <div class="nav__box nav__box--links">
+                    <a
+                        (click)="onClick()"
+                        routerLink="/search"
+                        routerLinkActive="nav__link--active"
+                        class="nav__link">Search</a>
 
-                <a (click)="onClick()"
-                    routerLink="/auth"
-                    routerLinkActive="nav__link--active"
-                    class="nav__link"
-                    *ngIf="!isAuth">Login</a>
+                    <a
+                        (click)="onClick()"
+                        routerLink="/auth"
+                        routerLinkActive="nav__link--active"
+                        class="nav__link"
+                        *ngIf="!isAuth">Login</a>
 
-                <a (click)="onClick()"
-                    routerLink="/dashboard"
-                    routerLinkActive="nav__link--active"
-                    class="nav__link"
-                    *ngIf="isAuth">Dashboard</a>
+                    <a
+                        (click)="onClick()"
+                        routerLink="/dashboard"
+                        routerLinkActive="nav__link--active"
+                        class="nav__link"
+                        *ngIf="isAuth">Dashboard</a>
 
-                <a (click)="onLogout()"
-                class="nav__link"
-                *ngIf="isAuth"
-                > Logout <i class="fas fa-sign-out-alt"></i> </a>
+                    <a
+                        (click)="onLogout()"
+                        class="nav__link"
+                        *ngIf="isAuth"
+                        style="cursor: pointer;">
+                        Logout
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+
             </div>
-
-        </div>
-    </nav>
+        </nav>

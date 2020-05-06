@@ -11,10 +11,9 @@ import { DashboardService } from '../dashboard/dashboard.service';
 })
 export class AuthService {
   authChange = new Subject<boolean>();
-  userIdSubject = new Subject<any>();
   private isAuthenticated = false;
 
-  constructor(public auth: AngularFireAuth, private router: Router, private uiService: UiService) {}
+  constructor(public auth: AngularFireAuth, private router: Router, private uiService: UiService, private dashboardService: DashboardService) {}
 
 
   initAuthListener() {
@@ -23,6 +22,7 @@ export class AuthService {
         this.authChange.next(true);
         this.isAuthenticated = true;
         this.router.navigate(["/dashboard"]);
+        this.dashboardService.userIdSubject.next(user.uid);
       } else {
         this.authChange.next(false);
         this.isAuthenticated = false;
@@ -60,12 +60,11 @@ export class AuthService {
     });
   }
 
-  getCurrentUser(): any {
+  getCurrentUser() {
     this.auth.currentUser.then(user => {
       if (user) {
         console.log(user.uid);
-        this.userIdSubject.next(user.uid);
-        return user.uid;
+        this.dashboardService.userIdSubject.next(user.uid);
       }
     })
     .catch(error => {

@@ -1,73 +1,99 @@
-import { Injectable } from '@angular/core';
-import { Recipe } from '../models/recipe.model';
-import { Subject, Observable } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
-import { UiService } from '../shared/ui.service';
+import {Injectable} from '@angular/core';
+import {Recipe} from '../models/recipe.model';
+import {Subject, Observable} from 'rxjs';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {map} from 'rxjs/operators';
+import {UiService} from '../shared/ui.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class DashboardService {
-  private recipesCollection: AngularFirestoreCollection<Recipe>;
-  private userRecipesCollection: AngularFirestoreCollection<Recipe>;
-  private userRecipes: Recipe[];
+    private recipesCollection : AngularFirestoreCollection < Recipe >;
+    private userRecipesCollection : AngularFirestoreCollection < Recipe >;
+    private userRecipes : Recipe[];
+    private userId : string;
 
-  recipesSubject = new Subject<Recipe[]>();
+    recipesSubject = new Subject < Recipe[] > ();
+    userIdSubject = new Subject < string > ();
 
-  constructor(
-    private authService: AuthService,
-    private afs: AngularFirestore,
-    private uiService: UiService
-    ) {
+    constructor(private afs : AngularFirestore, private uiService : UiService) {
 
-    this.recipesCollection = this.afs.collection<Recipe>("recipes");
+        this
+            .userIdSubject
+            .subscribe(userId => {
+                this.userId = userId;
+            });
 
-    this.userRecipes = [];
-  }
+        this.recipesCollection = this.afs.collection < Recipe > ('recipes');
 
-  addRecipe(recipe: Recipe, id: string) {
-    const recipeToSave: Recipe = {
-      label: recipe.label,
-      uri: recipe.uri,
-      ingredients: recipe.ingredients,
-      image: recipe.image,
-      cautions: recipe.cautions,
-      calories: recipe.calories,
-      healthLabels: recipe.healthLabels,
-      dietLabels: recipe.dietLabels,
-      userId: id
-    };
-    this.recipesCollection.add(recipeToSave);
-  }
+        this.userRecipes = [];
+    }
 
-
-  fetchUserRecipes(id: string) {
-    this.uiService.loadingStateChanged.next(true);
-    this.userRecipesCollection = this.afs.collection<Recipe>("recipes", ref => ref.where("userId", "==", id));
-
-    this.userRecipesCollection.snapshotChanges().pipe(
-        map(actions => actions.map(a => {
-          const data = a.payload.doc.data() as Recipe;
-          const id = a.payload.doc.id;
-          return {id, ...data};
+    addRecipe(recipe : Recipe) {
+        if (this.userId) {
+            const recipeToSave : Recipe = {
+                label: recipe.label,
+                uri: recipe.uri,
+                ingredients: recipe.ingredients,
+                image: recipe.image,
+                cautions: recipe.cautions,
+                calories: recipe.calories,
+                healthLabels: recipe.healthLabels,
+                dietLabels: recipe.dietLabels,
+                userId: this.userId
+            };
+            this
+                .recipesCollection
+                .add(recipeToSave);
         }
-        ))
-        ).subscribe((recipes: Recipe[]) => {
-          this.userRecipes = recipes;
-          console.log(this.userRecipes);
-          this.recipesSubject.next([...this.userRecipes]);
-          setTimeout(() => {
-            this.uiService.loadingStateChanged.next(false);
-          }, 200);
-    });
-  }
+    }
 
-  deleteRecipe(id: string) {
+    fetchUserRecipes() {
+        if (this.userId) {
+            this
+                .uiService
+                .loadingStateChanged
+                .next(true);
+            this.userRecipesCollection = this.afs.collection < Recipe > ('recipes', (ref) => ref.where('userId', '==', this.userId));
 
-  }
+            this
+                .userRecipesCollection
+                .snapshotChanges()
+                .pipe(map((actions) => actions.map((a) => {
+                    const data = a
+                        .payload
+                        .doc
+                        .data()as Recipe;
+                    const id = a.payload.doc.id;
+                    return {
+                        id,
+                        ...data
+                    };
+                })))
+                .subscribe((recipes : Recipe[]) => {
+                    this.userRecipes = recipes;
+                    console.log(this.userRecipes);
+                    this
+                        .recipesSubject
+                        .next([...this.userRecipes]);
+                    setTimeout(() => {
+                        this
+                            .uiService
+                            .loadingStateChanged
+                            .next(false);
+                    }, 200);
+                });
+        }
+    }
 
-
-
+    deleteRecipe(id : string) {
+        const recipeRef = this
+            .recipesCollection
+            .doc(id);
+        recipeRef.delete().then(result => {
+          console.log("Successfully deleted the recipe!");
+        })
+        .catch(err => {
+          console.log("Error occurred!", err);
+        });
+    }
 }

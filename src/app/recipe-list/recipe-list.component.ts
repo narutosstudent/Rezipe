@@ -56,10 +56,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // user id
-    this.userIdSubscription = this.authService.userIdSubject.subscribe(userId => {
-      this.id = userId;
-    });
 
     // the recipes
     this.recipes = this.recipeService.getRecipes();
@@ -103,7 +99,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   // add recipe
   onAddRecipe(recipe: Recipe) {
     this.uiService.alertAction("Successfully added this recipe!", "success");
-    this.dashboardService.addRecipe(recipe, this.id);
+    this.dashboardService.addRecipe(recipe);
   }
 
   // Unsubscribe (Subscriptions)

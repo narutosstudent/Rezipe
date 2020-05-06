@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private authService: AuthService
     ) {
     this.recipes = [];
-    this.authService.getCurrentUser();
   }
 
     ngOnInit(): void {
@@ -37,17 +36,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.isLoading = isLoading;
       });
 
-      // user id
-      this.userIdSubscription = this.authService.userIdSubject.subscribe(userId => {
-        this.id = userId;
-      });
-
-      // Fetch Recipes
-      this.dashboardService.fetchUserRecipes(this.id);
-
       this.recipesSubscription = this.dashboardService.recipesSubject.subscribe(recipes => {
         this.recipes = recipes;
       });
+
+      this.authService.getCurrentUser();
+
+      this.dashboardService.fetchUserRecipes();
+
   }
 
   onRecipeDelete(id: string) {
