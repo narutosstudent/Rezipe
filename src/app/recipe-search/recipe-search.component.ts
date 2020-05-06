@@ -68,7 +68,6 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();
     }

@@ -24,7 +24,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   authSubscription: Subscription;
   recipesSubjectSubscription: Subscription;
   loadingSubscription: Subscription;
-  userIdSubscription: Subscription;
 
   buttonActionName: string = "Add";
 
@@ -37,10 +36,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   indexOfLastRecipe: number;
   indexOfFirstRecipe: number;
   currentRecipes: Recipe[];
-
-  // user id
-  id: string;
-
 
 
 
@@ -114,10 +109,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();
-    }
-
-    if (this.userIdSubscription) {
-      this.userIdSubscription.unsubscribe();
     }
 
   }

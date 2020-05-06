@@ -18,11 +18,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipeSubscription: Subscription;
   loadingSubscription: Subscription;
   authSubscription: Subscription;
-  userIdSubscription: Subscription;
 
   isAuth = false;
-
-  id: string;
 
   constructor(
     private recipeService: RecipeService,
@@ -75,10 +72,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     }
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
-    }
-
-    if (this.userIdSubscription) {
-      this.userIdSubscription.unsubscribe();
     }
   }
 }

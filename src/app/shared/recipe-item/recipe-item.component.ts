@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
 import { RecipeService } from 'src/app/recipe.service';
 import { Recipe } from 'src/app/models/recipe.model';
 import { UiService } from '../ui.service';
