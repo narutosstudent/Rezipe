@@ -10,10 +10,10 @@ import {environment} from "./../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class RecipeService {
-    private recipes : Recipe[];
+    private recipes: Recipe[];
     recipesSubject = new Subject < Recipe[] > ();
 
-    private recipe : Recipe;
+    private recipe: Recipe;
     recipeSubject = new Subject < Recipe > ();
 
     constructor(private http: HttpClient, private uiService: UiService, private router: Router) {
@@ -21,12 +21,12 @@ export class RecipeService {
     }
 
     // Fetches the Recipes based on parameters
-    searchRecipes(minCal : number, maxCal : number, name : string) {
+    searchRecipes(minCal: number, maxCal: number, name: string) {
         this
             .uiService
             .loadingStateChanged
             .next(true);
-        
+
         let searchParams = new HttpParams();
         searchParams = searchParams.append("q", name);
         searchParams = searchParams.append("calories", `${minCal}-${maxCal}`);
@@ -55,7 +55,7 @@ export class RecipeService {
                         .uiService
                         .loadingStateChanged
                         .next(false);
-                }, 1000);
+                }, 500);
             });
     }
 
@@ -83,13 +83,12 @@ export class RecipeService {
                 this
                     .recipeSubject
                     .next(Object.assign({}, this.recipe));
-
                 setTimeout(() => {
                     this
                         .uiService
                         .loadingStateChanged
                         .next(false);
-                }, 1000);
+                }, 500);
             });
     }
 
