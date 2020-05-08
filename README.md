@@ -1,6 +1,6 @@
 # Rezipe
 
-A website where people can search recipes based on name & calories as well as adding them to their dashboard.
+A website where people can search recipes based on name & calories. After being authenticated users can add recipes into their dashboard.
 
 ## Built With
 
