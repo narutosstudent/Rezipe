@@ -2,28 +2,13 @@
 
 A website where people can search recipes based on name & calories as well as adding them to their dashboard.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development purposes.
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-```
-npm install
-```
-### Do not forget the key and id in src/environments
-
-## Deployment
-
-Add keys and You will be abled to deploy this Zeit with now
-
 ## Built With
 
 * [Angular] - The Front End Framework used
 * [Edemam] - The Api used
 * [(S)CSS] - UI Framework used for styling
+* [Angularfire] - Angular Library for firebase
+* [Firebase] - Back - End Solution used
 
 
 ## Authors
@@ -37,10 +22,13 @@ This project is licensed under the MIT License
 # What I Learned
 - Angular
 - Working with APIs
-- Working with localStorage
 - Splitting app into modules
+- Lazy loading modules
 - How to create components, modules, services & more and work with these
 - Using environment variables
 - Creating reusable components
-- Deploying on Zeit with now
+- Working with firebase
+- Working with angularfire
+- Adding a Front - End based pagination
 - Implementing form validation
+- Creating a shared module
