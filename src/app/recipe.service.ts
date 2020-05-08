@@ -14,7 +14,7 @@ export class RecipeService {
     recipesSubject = new Subject < Recipe[] > ();
 
     private recipe: Recipe;
-    recipeSubject = new Subject < Recipe > ();
+    recipeSubject = new Subject<Recipe>();
 
     constructor(private http: HttpClient, private uiService: UiService, private router: Router) {
         this.recipes = [];
@@ -27,6 +27,7 @@ export class RecipeService {
             .loadingStateChanged
             .next(true);
         this.recipes = [];
+        this.recipesSubject.next([]);
         let searchParams = new HttpParams();
         searchParams = searchParams.append("q", name);
         searchParams = searchParams.append("calories", `${minCal}-${maxCal}`);
@@ -37,6 +38,7 @@ export class RecipeService {
 
         this.http.get < RecipeResponseData > ("https://api.edamam.com/search", {params: searchParams})
             .subscribe((responseData : RecipeResponseData) => {
+              this.recipes = [];
                 responseData
                     .hits
                     .forEach(hit => {
