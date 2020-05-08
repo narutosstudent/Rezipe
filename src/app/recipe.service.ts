@@ -16,19 +16,17 @@ export class RecipeService {
     private recipe : Recipe;
     recipeSubject = new Subject < Recipe > ();
 
-    constructor(private http : HttpClient, private uiService : UiService, private router : Router) {
+    constructor(private http: HttpClient, private uiService: UiService, private router: Router) {
         this.recipes = [];
     }
 
-    // Fetches the Recipes based on parameters and also sets multiple values into
-    // localStorage
+    // Fetches the Recipes based on parameters
     searchRecipes(minCal : number, maxCal : number, name : string) {
         this
             .uiService
             .loadingStateChanged
             .next(true);
-
-        this.recipes = [];
+        
         let searchParams = new HttpParams();
         searchParams = searchParams.append("q", name);
         searchParams = searchParams.append("calories", `${minCal}-${maxCal}`);
@@ -36,8 +34,8 @@ export class RecipeService {
         searchParams = searchParams.append("app_key", environment.app_key);
         searchParams = searchParams.append("from", String(0));
         searchParams = searchParams.append("to", String(100));
+
         this.http.get < RecipeResponseData > ("https://api.edamam.com/search", {params: searchParams})
-            .pipe(catchError(this.handleError < RecipeResponseData > ("Search Recipes")))
             .subscribe((responseData : RecipeResponseData) => {
                 responseData
                     .hits
@@ -57,7 +55,7 @@ export class RecipeService {
                         .uiService
                         .loadingStateChanged
                         .next(false);
-                }, 2000);
+                }, 1000);
             });
     }
 
@@ -67,7 +65,7 @@ export class RecipeService {
     }
 
     // Retrieve a single http by its uri
-    searchRecipe(uri : string) {
+    searchRecipe(uri: string) {
         this
             .uiService
             .loadingStateChanged
@@ -76,8 +74,7 @@ export class RecipeService {
         searchParams = searchParams.append("r", uri);
         searchParams = searchParams.append("app_id", environment.app_id);
         searchParams = searchParams.append("app_key", environment.app_key);
-        this.http.get < Recipe > ("https://api.edamam.com/search", {params: searchParams})
-            .pipe(catchError(this.handleError < Recipe > ("Search Recipe")))
+        this.http.get<Recipe>("https://api.edamam.com/search", {params: searchParams})
             .subscribe(responseData => {
                 this
                     .router
@@ -99,14 +96,5 @@ export class RecipeService {
     // Get a single recipe
     getRecipe() {
         return this.recipe;
-    }
-
-    // Error handling for Http Requests
-    private handleError < T > (operation = 'operation', result?: T) {
-        return(error : any): Observable < T > => {
-            console.error(error);
-            console.log(`${operation} failed: ${error.message}`);
-            return of(result as T);
-        };
     }
 }
