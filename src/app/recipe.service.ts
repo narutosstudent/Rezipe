@@ -33,7 +33,7 @@ export class RecipeService {
         searchParams = searchParams.append("app_id", environment.app_id);
         searchParams = searchParams.append("app_key", environment.app_key);
         searchParams = searchParams.append("from", String(0));
-        searchParams = searchParams.append("to", String(100));
+        searchParams = searchParams.append("to", String(50));
 
         this.http.get < RecipeResponseData > ("https://api.edamam.com/search", {params: searchParams})
             .subscribe((responseData : RecipeResponseData) => {

@@ -23,8 +23,7 @@ export class DashboardService {
                 this.userId = userId;
             });
 
-        this.recipesCollection = this.afs.collection < Recipe > ('recipes');
-
+        this.recipesCollection = this.afs.collection<Recipe>('recipes');
         this.userRecipes = [];
     }
 
@@ -53,8 +52,8 @@ export class DashboardService {
                 .uiService
                 .loadingStateChanged
                 .next(true);
-            this.userRecipesCollection = this.afs.collection < Recipe > ('recipes', (ref) => ref.where('userId', '==', this.userId));
-
+            this.userRecipesCollection = this.afs.collection < Recipe > ('recipes',
+            (ref) => ref.where('userId', '==', this.userId));
             this
                 .userRecipesCollection
                 .snapshotChanges()
@@ -69,9 +68,8 @@ export class DashboardService {
                         ...data
                     };
                 })))
-                .subscribe((recipes : Recipe[]) => {
+                .subscribe((recipes: Recipe[]) => {
                     this.userRecipes = recipes;
-                    console.log(this.userRecipes);
                     this
                         .recipesSubject
                         .next([...this.userRecipes]);
@@ -89,11 +87,15 @@ export class DashboardService {
         const recipeRef = this
             .recipesCollection
             .doc(id);
-        recipeRef.delete().then(result => {
-          console.log("Successfully deleted the recipe!");
-        })
-        .catch(err => {
-          console.log("Error occurred!", err);
-        });
+        recipeRef
+            .delete()
+            .then(result => {
+                this
+                    .uiService
+                    .alertAction("Successfully deleted your recipe", "success")
+            })
+            .catch(err => {
+                this.uiService.alertAction(err.message, "success");
+            });
     }
 }

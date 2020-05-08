@@ -13,7 +13,12 @@ export class AuthService {
   authChange = new Subject<boolean>();
   private isAuthenticated = false;
 
-  constructor(public auth: AngularFireAuth, private router: Router, private uiService: UiService, private dashboardService: DashboardService) {}
+  constructor(
+    public auth: AngularFireAuth,
+    private router: Router,
+    private uiService: UiService,
+    private dashboardService: DashboardService
+    ) {}
 
 
   initAuthListener() {
@@ -26,7 +31,7 @@ export class AuthService {
       } else {
         this.authChange.next(false);
         this.isAuthenticated = false;
-        this.router.navigate(["/"]);
+        this.router.navigate(["/auth"]);
       }
     });
   }
@@ -63,7 +68,6 @@ export class AuthService {
   getCurrentUser() {
     this.auth.currentUser.then(user => {
       if (user) {
-        console.log(user.uid);
         this.dashboardService.userIdSubject.next(user.uid);
       }
     })
