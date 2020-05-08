@@ -73,12 +73,10 @@ export class DashboardService {
                     this
                         .recipesSubject
                         .next([...this.userRecipes]);
-                    setTimeout(() => {
                         this
                             .uiService
                             .loadingStateChanged
                             .next(false);
-                    }, 200);
                 });
         }
     }

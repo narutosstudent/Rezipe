@@ -45,7 +45,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
               private uiService: UiService,
               private authService: AuthService
               ) {
-
+              this.currentRecipes = [];
               this.recipes = [];
               this.authService.getCurrentUser();
   }

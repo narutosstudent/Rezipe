@@ -1,6 +1,6 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 <section class="recipes" *ngIf="recipes || recipes.length && !isLoading">
-    <h1 class="recipes__none" *ngIf="!recipes.length || !recipes">You currently have no recipes!</h1>
+    <h1 class="recipes__none" *ngIf="!recipes.length || !recipes && !isLoading">You currently have no recipes!</h1>
     <app-alert></app-alert>
     <app-recipe-item
         *ngFor="let recipe of recipes"

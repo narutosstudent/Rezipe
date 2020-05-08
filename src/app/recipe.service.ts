@@ -26,14 +26,14 @@ export class RecipeService {
             .uiService
             .loadingStateChanged
             .next(true);
-
+        this.recipes = [];
         let searchParams = new HttpParams();
         searchParams = searchParams.append("q", name);
         searchParams = searchParams.append("calories", `${minCal}-${maxCal}`);
         searchParams = searchParams.append("app_id", environment.app_id);
         searchParams = searchParams.append("app_key", environment.app_key);
         searchParams = searchParams.append("from", String(0));
-        searchParams = searchParams.append("to", String(50));
+        searchParams = searchParams.append("to", String(100));
 
         this.http.get < RecipeResponseData > ("https://api.edamam.com/search", {params: searchParams})
             .subscribe((responseData : RecipeResponseData) => {
