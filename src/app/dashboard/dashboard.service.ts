@@ -7,10 +7,10 @@ import {UiService} from '../shared/ui.service';
 
 @Injectable({providedIn: 'root'})
 export class DashboardService {
-    private recipesCollection : AngularFirestoreCollection < Recipe >;
-    private userRecipesCollection : AngularFirestoreCollection < Recipe >;
-    private userRecipes : Recipe[];
-    private userId : string;
+    private recipesCollection: AngularFirestoreCollection <Recipe>;
+    private userRecipesCollection: AngularFirestoreCollection <Recipe>;
+    private userRecipes: Recipe[];
+    private userId: string;
 
     recipesSubject = new Subject < Recipe[] > ();
     userIdSubject = new Subject < string > ();
@@ -27,7 +27,7 @@ export class DashboardService {
         this.userRecipes = [];
     }
 
-    addRecipe(recipe : Recipe) {
+    addRecipe(recipe: Recipe) {
         if (this.userId) {
             const recipeToSave : Recipe = {
                 label: recipe.label,
@@ -83,7 +83,7 @@ export class DashboardService {
         }
     }
 
-    deleteRecipe(id : string) {
+    deleteRecipe(id: string) {
         const recipeRef = this
             .recipesCollection
             .doc(id);
